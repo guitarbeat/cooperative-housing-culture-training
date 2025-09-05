@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The 'Mad Sad Glad' exercise is a structured framework for emotional reflection and feedback within cooperative housing. It enables participants to articulate experiences, identify areas for improvement, and acknowledge successes, fostering a more cohesive community culture. This exercise provides trustees with valuable insights into member sentiment and supports proactive issue resolution.
+This exercise is a structured framework for emotional reflection and feedback within cooperative housing. It enables participants to articulate experiences, identify areas for improvement, and acknowledge successes, fostering a more cohesive community culture. For trustees, this exercise provides valuable insights into member sentiment, supporting proactive issue resolution and strategic planning.
 
 ## Facilitator Guide
 
@@ -54,7 +54,7 @@ This section focuses on positive experiences and aspects that enhance cooperativ
 *   **Introduction to Glad (1 minute):** Introduce "Glad" as a space to celebrate positive contributions. Acknowledge what makes the cooperative unique and positive.
 *   **Individual Contributions (5 minutes):** Participants document positive experiences.
 *   **Consensus Identification (5 minutes):** Participants react to entries that resonate.
-*   **Facilitated Discussion (7 minutes):** Discuss the top 2-3 entries, identifying underlying values and strategies to amplify positive elements.
+*   **Facilited Discussion (7 minutes):** Discuss the top 2-3 entries, identifying underlying values and strategies to amplify positive elements.
 *   **Summary of Glad (2 minutes):** Summarize positive themes and discuss strategies for integrating these elements into future planning.
 
 ### Conclusion – Synthesizing Insights & Establishing Accountability (5 minutes)
