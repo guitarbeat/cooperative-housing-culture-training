@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Test Suite</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+    <select id="policy-type-selector">
+      <option value="">-- Select a policy type --</option>
+      <option value="conflict">Conflict Resolution Policy</option>
+    </select>
+    <div id="policy-questions" class="hidden"></div>
+    <div id="policy-preview" class="hidden">
+      <div id="policy-content"></div>
+    </div>
+    <button id="download-policy"></button>
+  </div>
+  <script src="https://code.jquery.com/qunit/qunit-2.20.0.js"></script>
+  <script src="js/interactive.js"></script>
+  <script src="js/tests.js"></script>
+</body>
+</html>

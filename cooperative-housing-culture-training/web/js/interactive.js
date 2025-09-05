@@ -532,25 +532,27 @@ function initPolicyWizard() {
         }
     };
 
+    // Add a button to generate the policy, initially hidden
+    const generateButton = document.createElement('button');
+    generateButton.id = 'generate-policy';
+    generateButton.className = 'bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4 hidden';
+    generateButton.textContent = 'Generate Policy';
+    policyQuestions.parentNode.insertBefore(generateButton, policyQuestions.nextSibling);
+
     policyTypeSelector.addEventListener('change', function() {
         const selectedType = this.value;
         if (selectedType && policyTypes[selectedType]) {
             policyQuestions.innerHTML = policyTypes[selectedType].questions;
             policyQuestions.classList.remove('hidden');
+            generateButton.classList.remove('hidden');
             policyPreview.classList.add('hidden'); // Hide preview when questions change
         } else {
             policyQuestions.innerHTML = '';
             policyQuestions.classList.add('hidden');
+            generateButton.classList.add('hidden');
             policyPreview.classList.add('hidden');
         }
     });
-
-    // Add a button to generate the policy
-    const generateButton = document.createElement('button');
-    generateButton.id = 'generate-policy';
-    generateButton.className = 'bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4';
-    generateButton.textContent = 'Generate Policy';
-    policyQuestions.parentNode.insertBefore(generateButton, policyQuestions.nextSibling);
 
     generateButton.addEventListener('click', function() {
         generatePolicy(policyTypeSelector.value);
