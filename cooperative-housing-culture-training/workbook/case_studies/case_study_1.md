@@ -8,37 +8,32 @@ Sunrise Cooperative Housing, a 24-unit complex operating for 15 years, comprises
 
 A dispute arose between Elena (second-floor) and Marcus (first-floor) due to water damage from Elena's deteriorating bathroom caulking. Marcus reported ceiling stains, traced to Elena's unit.
 
-- **Elena's Position**: Claims structural issue, hidden caulk, and inability to afford repairs as a senior on fixed income. Cites 12 years without prior maintenance issues.
+- **Elena's Position**: Claims the issue is structural, citing the hidden nature of the deteriorating caulk and her inability to afford repairs as a senior on a fixed income. She highlights her 12-year residency without prior maintenance issues.
 
-- **Marcus's Position**: Demands Elena cover all repairs, citing occupancy agreement on unit maintenance. Frustrated by a second water incident (first unrelated, co-op fixed).
+- **Marcus's Position**: Demands Elena cover all repairs, citing the occupancy agreement which stipulates member responsibility for unit maintenance. His frustration is compounded by this being the second water incident affecting his unit (the first was unrelated and covered by the co-op).
 
-- **Maintenance Committee's Position**: Divided on whether it's Elena's responsibility per agreement or a co-op cost due to normal wear and tear.
+- **Maintenance Committee's Position**: The committee is divided. Some members believe it's Elena's responsibility per the agreement, while others argue it's a cooperative cost due to normal wear and tear over time.
 
 The dispute has escalated, creating community tension as members take sides.
 
-## Key Considerations
+## Key Considerations for Trustees
 
-1. Occupancy agreement: Members are responsible for unit maintenance, including plumbing.
-2. Bylaws: Co-op maintains structural integrity, but definition of 'structural issue' vs. 'unit maintenance' is ambiguous.
-3. Financials: Modest reserve fund, prioritized for roof replacement.
-4. Policy gap: No specific policy for inter-unit water damage.
-5. Member standing: Both Elena and Marcus are active, well-regarded members.
+1.  **Occupancy Agreement Analysis**: The agreement states members are responsible for their unit's maintenance, including plumbing. Trustees must interpret whether this provision covers gradual deterioration like caulking.
+2.  **Bylaw Ambiguity**: The co-op's bylaws require it to maintain the building's structural integrity, but the distinction between a 'structural issue' and 'unit maintenance' is not clearly defined.
+3.  **Financial Implications**: The cooperative has a modest reserve fund, which is prioritized for a planned roof replacement. Covering the repairs would impact this financial planning.
+4.  **Policy Gaps**: The absence of a specific policy for inter-unit water damage creates a vacuum, leading to ad-hoc decision-making.
+5.  **Member Equity**: Both Elena and Marcus are active, well-regarded members. The board's decision will set a precedent and must be perceived as fair and equitable.
 
-## Discussion Questions
+## Discussion Questions for Trustees
 
-1. What are the underlying interests of each party in this conflict?
+1.  What are the underlying interests of each party in this conflict, beyond their stated positions?
+2.  How does the ambiguity in the co-op's governing documents contribute to this dispute? What are the risks of leaving these ambiguities unaddressed?
+3.  What communication breakdowns might be exacerbating the conflict, and how could the board model effective communication?
+4.  What potential solutions could address both Elena's financial constraints and Marcus's need for timely repairs, while being fair to the cooperative as a whole?
+5.  How could the cooperative proactively prevent similar disputes in the future? What specific policy changes or educational initiatives would you recommend?
+6.  As a trustee, what process would you recommend for resolving this conflict, ensuring transparency and fairness?
 
-2. How might the ambiguity in the co-op's policies be contributing to this dispute?
-
-3. What communication issues might be exacerbating the conflict?
-
-4. What potential solutions could address both Elena's financial concerns and Marcus's desire for timely repairs?
-
-5. How could the cooperative prevent similar disputes in the future?
-
-6. What process would you recommend for resolving this conflict?
-
-## Role-Playing Exercise
+## Role-Playing Exercise for Trustees
 
 Divide into groups with the following roles:
 - Elena
@@ -49,7 +44,8 @@ Divide into groups with the following roles:
 
 Have the mediator facilitate a discussion using the conflict resolution framework presented in the training. After 15 minutes, discuss as a group:
 
-1. What approaches were effective in moving toward resolution?
-2. What barriers to resolution did you encounter?
-3. What policy changes might prevent similar conflicts in the future?
+1.  What approaches were effective in moving toward a resolution?
+2.  What barriers to resolution did you encounter, and how did you address them?
+3.  What policy changes would you propose to the board to prevent similar conflicts in the future?
+
 
