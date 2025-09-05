@@ -1,3 +1,6 @@
+
+
+
 # Conflict Resolution Styles Inventory for Cooperative Trustees
 
 ## Purpose
@@ -109,16 +112,16 @@ Your highest score(s) indicate your dominant conflict resolution style(s):
 -   *Advantages*: Builds robust relationships, fosters innovation, leads to sustainable resolutions.
 -   *Disadvantages*: Resource-intensive (time, effort), requires high levels of trust and open communication.
 
-## Reflective Inquiry
+## Reflective Inquiry for Trustees
 
-1.  Identify your primary conflict resolution style(s). Does this align with your self-perception?
+1.  Identify your primary conflict resolution style(s). Does this align with your self-perception as a trustee?
 
-2.  Analyze the impact of your preferred style(s) on your interactions within the cooperative.
+2.  Analyze the impact of your preferred style(s) on your interactions with fellow board members, general members, and committees.
 
-3.  In what specific contexts might your dominant style(s) prove counterproductive?
+3.  In what specific governance contexts might your dominant style(s) prove counterproductive or beneficial?
 
-4.  Which alternative conflict resolution style(s) do you aspire to cultivate, and what is your rationale?
+4.  Which alternative conflict resolution style(s) do you aspire to cultivate to enhance your effectiveness as a trustee, and what is your rationale?
 
-5.  Formulate strategies for adapting your approach to enhance effectiveness across diverse conflict scenarios.
+5.  Formulate strategies for adapting your approach to enhance effectiveness across diverse conflict scenarios, considering the long-term health and stability of the cooperative.
 
 

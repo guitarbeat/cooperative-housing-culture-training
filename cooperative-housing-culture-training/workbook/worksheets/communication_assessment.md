@@ -1,13 +1,13 @@
 # Communication Effectiveness Assessment for Cooperative Trustees
 
 ## Purpose
-This assessment tool is designed for cooperative trustees to critically evaluate and enhance their organization's communication efficacy. It facilitates identification of current strengths and strategic areas for improvement in communication practices.
+This assessment tool is designed for cooperative trustees to critically evaluate and enhance their organization's communication efficacy. It facilitates the identification of current strengths and strategic areas for improvement in communication practices, aligning with governance responsibilities.
 
 ## Instructions
 1.  Rate your cooperative's communication practices on a scale of 1-5 for each item.
-2.  Aggregate scores for each section to identify performance trends.
-3.  Prioritize key strengths and areas requiring strategic intervention.
-4.  Formulate a concrete action plan based on the assessment outcomes.
+2.  Aggregate scores for each section to identify performance trends and areas requiring attention.
+3.  Prioritize key strengths and areas necessitating strategic intervention.
+4.  Formulate a concrete action plan based on the assessment outcomes, integrating it into governance objectives.
 
 ## Rating Scale
 1 = Seldom/Minimal
@@ -23,7 +23,7 @@ This assessment tool is designed for cooperative trustees to critically evaluate
 | Item | Rating (1-5) |
 |------|--------------|
 | Our cooperative maintains regular, scheduled communication with all members. | |
-| We leverage diverse communication channels (e.g., email, formal meetings, digital platforms) to disseminate information. | |
+| We utilize diverse communication channels (e.g., email, formal meetings, digital platforms) for information dissemination. | |
 | Critical information is disseminated promptly and comprehensively to all stakeholders. | |
 | Members have clear access to information regarding cooperative decisions and policy frameworks. | |
 | Communication protocols are consistent and predictable across all interactions. | |
@@ -82,7 +82,7 @@ This assessment tool is designed for cooperative trustees to critically evaluate
 - 40-59: Adequate communication, necessitating considerable attention.
 - Below 40: Deficient communication, demanding immediate and comprehensive remediation.
 
-## Action Planning
+## Action Planning for Trustees
 
 Based on your assessment, delineate the following:
 
@@ -112,5 +112,6 @@ Based on your assessment, delineate the following:
 5.  **Follow-up Protocol:**
     - Reassessment Date: _______________
     - Progress Tracking Methodology: _______________
+
 
 
