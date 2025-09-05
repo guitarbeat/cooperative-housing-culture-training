@@ -4,7 +4,7 @@
   "description": "Tests for the web interface",
   "main": "index.html",
   "scripts": {
-    "test": "node run-tests.js"
+    "test": "node run-policy-wizard-tests.js"
   },
   "author": "",
   "license": "MIT",

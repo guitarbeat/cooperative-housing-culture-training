@@ -7,7 +7,7 @@ const PORT = 8080;
 const ROOT = '.'; // Serve files from the current directory
 
 const server = http.createServer((req, res) => {
-    const filePath = path.join(ROOT, req.url === '/' ? 'test.html' : req.url);
+    const filePath = path.join(ROOT, req.url === '/' ? 'policy-wizard-test-runner.html' : req.url);
     const extname = String(path.extname(filePath)).toLowerCase();
     const mimeTypes = {
         '.html': 'text/html',
@@ -45,7 +45,7 @@ async function runTests() {
     page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
     try {
-        await page.goto(`http://localhost:${PORT}/test.html`);
+        await page.goto(`http://localhost:${PORT}/policy-wizard-test-runner.html`);
         await page.waitForSelector('#qunit-test-output', { timeout: 10000 });
 
         const testResult = await page.evaluate(() => {
