@@ -1,7 +1,7 @@
 # Conflict Resolution Policy Template for Cooperative Housing Trustees
 
 ## Purpose
-This policy outlines a structured, equitable, and transparent framework for dispute resolution within [Cooperative Name]. It aims to facilitate prompt conflict resolution, foster constructive inter-member relationships, and reinforce cooperative values of community and shared governance.
+This policy establishes a structured, equitable, and transparent framework for dispute resolution within [Cooperative Name]. It aims to facilitate prompt conflict resolution, foster constructive inter-member relationships, and reinforce cooperative values of community and shared governance, specifically empowering trustees with a clear procedural guide.
 
 ## Scope
 This policy applies to conflicts between:
@@ -11,17 +11,17 @@ This policy applies to conflicts between:
 - Members and cooperative staff (if applicable)
 
 ## Guiding Principles
-1.  **Proactive Engagement**: Address conflicts promptly to prevent escalation.
-2.  **Mutual Respect**: Treat all participants with dignity.
-3.  **Impartiality**: Ensure equitable opportunity for all parties to present perspectives without bias.
-4.  **Confidentiality**: Handle sensitive information with discretion.
-5.  **Procedural Transparency**: The process will be clearly articulated and accessible.
-6.  **Collaborative Resolution**: Encourage joint efforts for mutually beneficial solutions.
+1.  **Proactive Engagement**: Conflicts should be addressed promptly and constructively to prevent escalation and maintain cooperative harmony.
+2.  **Mutual Respect**: All parties involved in a conflict resolution process must be treated with dignity and respect, fostering an environment conducive to resolution.
+3.  **Impartiality**: The process must ensure equitable opportunity for all parties to present their perspectives without bias, maintaining neutrality throughout.
+4.  **Confidentiality**: Sensitive information shared during conflict resolution will be handled with the utmost discretion, adhering to privacy regulations and building trust.
+5.  **Procedural Transparency**: The conflict resolution process will be clearly articulated, accessible, and consistently applied to all members.
+6.  **Collaborative Resolution**: The policy encourages joint efforts and open dialogue to achieve mutually beneficial solutions that uphold the cooperative's collective interests.
 
 ## Conflict Resolution Process
 
 ### Phase 1: Direct Engagement
-Members are encouraged to initiate direct communication to address concerns before formal intervention. This engagement should be constructive, focusing on the issue rather than personal critique, and aiming for an informal resolution.
+Members are encouraged to initiate direct, constructive communication to address concerns before formal intervention. This informal approach should focus on the issue at hand, aiming for a prompt and amicable resolution.
 
 **Timeline**: Attempt direct engagement within 14 calendar days of the incident or awareness of the issue.
 
