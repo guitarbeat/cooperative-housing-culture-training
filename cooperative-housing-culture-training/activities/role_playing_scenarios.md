@@ -1,7 +1,7 @@
 # Advanced Role-Playing Scenarios for Trustee Conflict Resolution Training
 
 ## Purpose
-These scenarios simulate complex cooperative housing challenges, enabling trustees to refine advanced conflict resolution, negotiation, and strategic decision-making skills.
+These scenarios simulate complex cooperative housing challenges, enabling trustees to refine advanced conflict resolution, negotiation, and strategic decision-making skills essential for effective governance.
 
 ## Facilitator Instructions
 1.  **Group Formation:** Divide participants into small groups (4-6 individuals) to foster dynamic interaction and diverse perspectives.
