@@ -1,13 +1,13 @@
 # Communication Effectiveness Assessment for Cooperative Trustees
 
 ## Purpose
-This assessment tool is designed for cooperative trustees to critically evaluate and enhance their organization's communication efficacy. It facilitates the identification of current strengths and strategic areas for improvement in communication practices, aligning with governance responsibilities.
+This assessment tool helps cooperative trustees evaluate and enhance their organization's communication efficacy. It identifies strengths and areas for improvement in communication practices, aligning with governance responsibilities.
 
 ## Instructions
-1.  Rate your cooperative's communication practices on a scale of 1-5 for each item.
-2.  Aggregate scores for each section to identify performance trends and areas requiring attention.
-3.  Prioritize key strengths and areas necessitating strategic intervention.
-4.  Formulate a concrete action plan based on the assessment outcomes, integrating it into governance objectives.
+1. Rate your cooperative's communication practices on a scale of 1-5 for each item.
+2. Aggregate scores to identify performance trends and areas for improvement.
+3. Prioritize strengths and areas for strategic intervention.
+4. Formulate an action plan based on assessment outcomes, integrating it into governance objectives.
 
 ## Rating Scale
 1 = Seldom/Minimal

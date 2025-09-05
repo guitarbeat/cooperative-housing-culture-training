@@ -1,22 +1,22 @@
 # Conflict Resolution Policy Template for Cooperative Housing Trustees
 
 ## Purpose
-This policy establishes a structured, equitable, and transparent framework for resolving disputes within [Cooperative Name]. Its objectives are to facilitate prompt and effective conflict resolution, foster constructive inter-member relationships, and reinforce the cooperative's values of community and shared governance.
+This policy outlines a structured, equitable, and transparent framework for dispute resolution within [Cooperative Name]. It aims to facilitate prompt conflict resolution, foster constructive inter-member relationships, and reinforce cooperative values of community and shared governance.
 
 ## Scope
-This policy applies to conflicts arising between:
--   Individual members
--   Members and the Board of Directors
--   Members and established committees
--   Members and cooperative staff (if applicable)
+This policy applies to conflicts between:
+- Individual members
+- Members and the Board of Directors
+- Members and established committees
+- Members and cooperative staff (if applicable)
 
 ## Guiding Principles
-1.  **Proactive Engagement**: Address conflicts expeditiously to prevent escalation and mitigate adverse impacts.
-2.  **Mutual Respect**: Treat all participants with dignity and respect throughout the resolution process.
-3.  **Impartiality**: Ensure all parties have an equitable opportunity to present their perspectives without bias.
-4.  **Confidentiality**: Handle sensitive information with discretion, adhering to privacy protocols.
-5.  **Procedural Transparency**: The conflict resolution process will be clearly articulated, accessible, and understandable to all members.
-6.  **Collaborative Resolution**: Encourage joint efforts to identify mutually beneficial and sustainable solutions aligned with the cooperative's long-term interests.
+1.  **Proactive Engagement**: Address conflicts promptly to prevent escalation.
+2.  **Mutual Respect**: Treat all participants with dignity.
+3.  **Impartiality**: Ensure equitable opportunity for all parties to present perspectives without bias.
+4.  **Confidentiality**: Handle sensitive information with discretion.
+5.  **Procedural Transparency**: The process will be clearly articulated and accessible.
+6.  **Collaborative Resolution**: Encourage joint efforts for mutually beneficial solutions.
 
 ## Conflict Resolution Process
 

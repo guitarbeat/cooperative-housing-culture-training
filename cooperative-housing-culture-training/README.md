@@ -1,6 +1,6 @@
 # Advanced Training for Cooperative Housing Trustees: Culture & Conflict Resolution
 
-This repository provides a comprehensive training program for trustees of cooperative housing organizations. The curriculum focuses on advanced strategies for cultivating positive community cultures and resolving complex conflicts. The material integrates theoretical frameworks with practical applications, case studies, and interactive components, tailored for a college-educated audience.
+This repository offers an advanced training program for cooperative housing trustees, focusing on cultivating positive community cultures and resolving complex conflicts. The curriculum integrates theoretical frameworks with practical applications, case studies, and interactive components, specifically tailored for a college-educated audience.
 
 ## Program Objectives
 

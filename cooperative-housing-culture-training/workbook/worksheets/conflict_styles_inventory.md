@@ -1,10 +1,7 @@
-
-
-
 # Conflict Resolution Styles Inventory for Cooperative Trustees
 
 ## Purpose
-This inventory is designed to facilitate self-assessment of preferred conflict resolution styles among cooperative trustees. Understanding these inherent tendencies is crucial for optimizing interpersonal dynamics and strategic decision-making within the cooperative framework.
+This inventory helps cooperative trustees self-assess their preferred conflict resolution styles. Understanding these tendencies is crucial for optimizing interpersonal dynamics and strategic decision-making within the cooperative framework.
 
 ## Instructions
 1.  Evaluate each statement based on its applicability to your behavior in conflict scenarios, utilizing the provided rating scale.

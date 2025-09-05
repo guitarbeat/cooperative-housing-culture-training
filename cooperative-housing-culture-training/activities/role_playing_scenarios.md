@@ -1,14 +1,14 @@
 # Advanced Role-Playing Scenarios for Trustee Conflict Resolution Training
 
 ## Purpose
-These scenarios simulate complex cooperative housing challenges, enabling trustees to refine advanced conflict resolution, negotiation, and strategic decision-making skills within a practical context.
+These scenarios simulate complex cooperative housing challenges, enabling trustees to refine advanced conflict resolution, negotiation, and strategic decision-making skills.
 
 ## Facilitator Instructions
 1.  **Group Formation:** Divide participants into small groups (4-6 individuals) to foster dynamic interaction and diverse perspectives.
 2.  **Role Assignment:** Assign specific roles to each participant, ensuring comprehensive representation of stakeholder viewpoints and interests.
 3.  **Preparation Time:** Allocate 5 minutes for participants to internalize their assigned roles, objectives, and potential strategies.
 4.  **Role-Play Execution:** Conduct the role-play for 15-20 minutes, encouraging realistic engagement, strategic communication, and collaborative problem-solving.
-5.  **Structured Debriefing:** Facilitate a 10-minute debriefing session using the provided analytical questions to extract key learnings, discuss alternative approaches, and synthesize insights.
+5.  **Structured Debriefing:** Facilitate a 10-minute debriefing session using analytical questions to extract key learnings, discuss alternative approaches, and synthesize insights.
 
 ---
 
@@ -107,11 +107,11 @@ The cooperative faces a critical decision on allocating resources for a major ma
 ## Facilitation Notes for Trustee Training
 
 ### Guidelines for Facilitators
--   **Clarity of Roles:** Ensure all participants clearly understand their assigned roles, objectives, and the scenario context.
--   **Dynamic Observation:** Observe group dynamics, communication patterns, and emerging leadership during the role-play.
--   **Judicious Intervention:** Intervene only when discussions become stagnant, deviate significantly from objectives, or become counterproductive. Encourage self-correction and peer facilitation.
--   **Solution Derivation:** Encourage participants to independently derive and articulate solutions, refraining from direct suggestions or leading questions.
--   **Process-Oriented Debriefing:** Direct debriefing discussions towards process observations, strategic choices, and analytical insights, emphasizing transferable skills and lessons learned.
+-   **Clarity of Roles:** Ensure participants understand their roles, objectives, and scenario context.
+-   **Dynamic Observation:** Observe group dynamics, communication patterns, and emerging leadership.
+-   **Judicious Intervention:** Intervene only when discussions stagnate, deviate, or become counterproductive. Encourage self-correction.
+-   **Solution Derivation:** Encourage participants to independently derive solutions; avoid direct suggestions.
+-   **Process-Oriented Debriefing:** Direct debriefing towards process observations, strategic choices, and analytical insights, emphasizing transferable skills.
 
 ### Adapting Scenarios for Advanced Audiences
 These scenarios are highly adaptable to reflect specific contextual nuances and advanced learning objectives:
