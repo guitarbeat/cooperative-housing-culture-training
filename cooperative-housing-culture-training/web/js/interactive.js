@@ -19,9 +19,9 @@ function initConflictFlowchart() {
     const steps = [
         {
             id: 'step1',
-            title: 'Acknowledge the Conflict',
-            description: 'Recognize that a conflict exists and needs to be addressed.',
-            details: 'Acknowledging conflict is the first step toward resolution. Signs of conflict include tension in meetings, avoidance behaviors, or direct complaints. Create a safe space for discussing the issue by approaching it with curiosity rather than judgment. Remember that conflict is a natural part of community living and can lead to positive growth when handled well.',
+            title: 'Acknowledge Conflict',
+            description: 'Recognize that a conflict exists and requires attention.',
+            details: 'Effective conflict resolution begins with acknowledging the presence of a dispute. This involves recognizing indicators such as increased tension, avoidance behaviors, or direct complaints. Approach the situation with an objective and curious mindset, rather than a judgmental one. Understand that conflict is an inherent aspect of communal living and, when managed effectively, can foster positive growth and strengthen cooperative bonds.',
             x: 100,
             y: 50,
             next: ['step2']
@@ -29,17 +29,17 @@ function initConflictFlowchart() {
         {
             id: 'step2',
             title: 'Gather Information',
-            description: 'Collect facts and perspectives from all involved parties.',
-            details: 'Take time to understand the full picture before attempting resolution. Meet with each party separately to hear their perspective. Ask open-ended questions like "What happened?" and "How did you feel about that?" Document key points without assigning blame. Look for objective information that might help clarify the situation.',
+            description: 'Collect comprehensive facts and diverse perspectives from all involved parties.',
+            details: 'Before attempting resolution, it is crucial to acquire a complete understanding of the situation. Conduct separate discussions with each party to ascertain their individual perspectives. Employ open-ended questions, such as "What transpired?" and "How did this affect you?" Document pertinent details objectively, refraining from assigning blame. Seek verifiable information to clarify the circumstances.',
             x: 100,
             y: 150,
             next: ['step3']
         },
         {
             id: 'step3',
-            title: 'Identify Interests',
-            description: 'Look beyond positions to understand underlying needs.',
-            details: 'Positions are what people say they want, while interests are why they want it. For example, someone\'s position might be "I want quiet hours extended," but their interest is "I need uninterrupted sleep." Identifying interests often reveals multiple ways to satisfy everyone\'s core needs. Ask "Why is this important to you?" to uncover underlying interests.',
+            title: 'Identify Core Interests',
+            description: 'Move beyond stated positions to understand underlying needs and motivations.',
+            details: 'Distinguish between \'positions\' (what individuals explicitly state they desire) and \'interests\' (the fundamental reasons behind those desires). For instance, a position might be "I require extended quiet hours," whereas the underlying interest is "I need uninterrupted rest." Identifying these core interests often reveals multiple viable solutions that can satisfy the essential needs of all parties. Ask "Why is this significant to you?" to uncover these deeper motivations.',
             x: 100,
             y: 250,
             next: ['step4']
@@ -47,8 +47,8 @@ function initConflictFlowchart() {
         {
             id: 'step4',
             title: 'Generate Solutions',
-            description: 'Brainstorm options that address core interests.',
-            details: 'Create a collaborative atmosphere where all parties contribute ideas. Separate idea generation from evaluation—first list all possible solutions without criticism. Encourage creative thinking and build on others\' ideas. Consider solutions that have worked in similar situations. Aim for quantity of ideas first, then evaluate quality.',
+            description: 'Brainstorm a range of options that address the identified core interests.',
+            details: 'Foster a collaborative environment where all participants contribute ideas freely. During this phase, prioritize the generation of numerous potential solutions without immediate evaluation or criticism. Encourage innovative thinking and the development of ideas based on previous suggestions. Consider successful approaches from similar past situations. The objective is to maximize the quantity of ideas before assessing their quality.',
             x: 300,
             y: 250,
             next: ['step5']
@@ -56,8 +56,8 @@ function initConflictFlowchart() {
         {
             id: 'step5',
             title: 'Evaluate & Select Solutions',
-            description: 'Choose options that best meet shared needs.',
-            details: 'Evaluate each potential solution against objective criteria such as fairness, feasibility, and alignment with cooperative values. Consider both short-term and long-term implications. Look for solutions that address the most important interests of all parties. Document the agreed-upon solution with specific details about implementation.',
+            description: 'Choose the most effective options that align with shared needs and cooperative values.',
+            details: 'Assess each proposed solution against objective criteria, including fairness, practicality, and adherence to cooperative principles. Consider both immediate and long-term implications. Prioritize solutions that address the most critical interests of all stakeholders. Formalize the agreed-upon solution with precise details regarding its implementation.',
             x: 300,
             y: 150,
             next: ['step6']
@@ -65,8 +65,8 @@ function initConflictFlowchart() {
         {
             id: 'step6',
             title: 'Implement & Follow Up',
-            description: 'Put solutions into action and monitor progress.',
-            details: 'Create a clear implementation plan with specific actions, responsibilities, and timelines. Schedule check-in points to evaluate how the solution is working. Be prepared to make adjustments if needed. Celebrate successful resolution and acknowledge everyone\'s contributions to the process. Document lessons learned for future conflict resolution.',
+            description: 'Execute the chosen solutions and monitor their effectiveness.',
+            details: 'Develop a clear implementation plan that includes specific actions, assigned responsibilities, and defined timelines. Schedule regular check-ins to evaluate the efficacy of the solution and make necessary adjustments. Acknowledge and celebrate successful resolutions, recognizing the contributions of all participants. Document lessons learned to inform future conflict resolution processes.',
             x: 300,
             y: 50,
             next: []
@@ -191,16 +191,16 @@ function initCommunicationSimulator() {
     // Define scenarios
     const scenarios = {
         scenario1: {
-            title: "Maintenance Request Dispute",
-            description: "A member has submitted multiple maintenance requests for a leaking faucet over the past month, but repairs haven't been completed. They're frustrated and confronting the maintenance coordinator at a community event."
+            title: "Maintenance Request Resolution",
+            description: "A member has repeatedly submitted maintenance requests for a persistent faucet leak, yet repairs remain incomplete. They confront the maintenance coordinator at a community event, expressing significant frustration."
         },
         scenario2: {
-            title: "Common Space Usage Conflict",
-            description: "Two members want to use the community room for different events scheduled at the same time. One member had informally reserved it weeks ago but didn't complete the official reservation form. The other member submitted the proper form yesterday."
+            title: "Common Space Scheduling Conflict",
+            description: "Two members seek to use the community room concurrently for distinct events. One member made an informal reservation weeks prior but failed to complete the official booking procedure. The other member submitted the proper reservation form yesterday."
         },
         scenario3: {
-            title: "Noise Complaint Discussion",
-            description: "A member approaches their neighbor about noise levels from late-night gatherings. This is the third time they've had this conversation in two months, and the noise has continued despite previous agreements to keep it down."
+            title: "Noise Disturbance Discussion",
+            description: "A member addresses a neighbor regarding excessive noise from late-night gatherings. This marks the third such discussion within two months, with previous agreements to mitigate noise having been disregarded."
         }
     };
     
@@ -250,107 +250,115 @@ function initCommunicationSimulator() {
         if (scenarioKey === 'scenario1') {
             if (style === 'Competing') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> "This is completely unacceptable. I've submitted three requests already and nothing has been done. I need this fixed immediately or I'll bring it up at the next board meeting."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I understand you're frustrated, but there's a process we need to follow. Your tone isn't helping the situation."</p>
-                    <p class="mb-2"><strong>You:</strong> "I don't care about the process. I care about having a working faucet. This needs to be your top priority."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The maintenance coordinator feels defensive and the relationship is damaged. The repair might get done faster, but at the cost of goodwill and future cooperation.</p>
+                    <p class="mb-2"><strong>You:</strong> "This is unacceptable. I have submitted three requests, and the issue remains unresolved. I expect immediate action, or I will escalate this to the board."</p>
+                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I understand your frustration, but adherence to established procedures is necessary. Your aggressive tone is counterproductive."</p>
+                    <p class="mb-2"><strong>You:</strong> "My priority is a functional faucet, not bureaucratic processes. This must be addressed immediately."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> The maintenance coordinator becomes defensive, and the professional relationship is strained. While the repair may be expedited, it comes at the cost of goodwill and future cooperation.</p>
                 `;
             } else if (style === 'Accommodating') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> "I'm sorry to bother you about this again. I know you're busy, but my faucet is still leaking."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Yes, I remember. We have several urgent repairs ahead of yours."</p>
-                    <p class="mb-2"><strong>You:</strong> "That's fine, I understand. I can wait longer if needed."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The relationship remains cordial, but your needs continue to be unmet. The repair remains low priority and may not be addressed for weeks.</p>
+                    <p class="mb-2"><strong>You:</strong> "I apologize for reiterating this, but my faucet continues to leak. I understand you are busy."</p>
+                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Yes, I recall. Several urgent repairs currently take precedence."</p>
+                    <p class="mb-2"><strong>You:</strong> "Understood. I am prepared to wait as necessary."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> The relationship remains amicable, but your needs are not met. The repair remains a low priority, potentially delaying resolution for an extended period.</p>
                 `;
             } else if (style === 'Avoiding') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> *Sees the maintenance coordinator but decides not to mention the issue*</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Hi there! Enjoying the community event?"</p>
-                    <p class="mb-2"><strong>You:</strong> "Yes, it's nice. Well, I should go get some food..."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> No conflict occurs, but the problem remains unresolved. Your frustration continues to build, potentially affecting your satisfaction with the cooperative.</p>
+                    <p class="mb-2"><strong>You:</strong> *Observes the maintenance coordinator but elects not to address the issue.*</p>
+                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Hello! Are you enjoying the community event?"</p>
+                    <p class="mb-2"><strong>You:</strong> "Yes, it's pleasant. I should attend to something else now..."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> Direct conflict is averted, but the underlying problem persists. Your frustration escalates, potentially diminishing your satisfaction with the cooperative environment.</p>
                 `;
             } else if (style === 'Compromising') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> "I wanted to check in about my faucet repair. It's been a month since my first request."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Yes, I know it's been a while. We've had several emergency repairs that took priority."</p>
-                    <p class="mb-2"><strong>You:</strong> "I understand emergencies come first. Could we agree on a specific date for my repair so I know when to expect it?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You reach an agreement for the repair to be completed next week. It's not immediate, but having a specific timeline reduces your frustration.</p>
+                    <p class="mb-2"><strong>You:</strong> "I am following up on my faucet repair. It has been a month since my initial request."</p>
+                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I acknowledge the delay. We have prioritized several emergency repairs."</p>
+                    <p class="mb-2"><strong>You:</strong> "I understand emergencies take precedence. Can we establish a definitive date for my repair to manage expectations?"</p>
+                    <p class="mb-4"><strong>Outcome:</strong> An agreement is reached for the repair to be completed within the next week. While not immediate, a clear timeline mitigates your frustration.</p>
                 `;
             } else if (style === 'Collaborating') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> "I'd like to talk about my faucet repair. I've submitted three requests, and I'm concerned about water waste and potential damage."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I appreciate you bringing this up. We've been overwhelmed with requests lately. Can you tell me more about the issue?"</p>
-                    <p class="mb-2"><strong>You:</strong> "The leak is getting worse, and I'm worried about mold developing. I have some basic plumbing knowledge - would it help if I assisted with the repair to make it go faster?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> Together you develop a plan that addresses both your need for a timely repair and the maintenance coordinator's limited resources. The coordinator agrees to prioritize your repair and provide materials if you can assist.</p>
+                    <p class="mb-2"><strong>You:</strong> "I wish to discuss my faucet repair. My concern is the ongoing water waste and potential structural damage."</p>
+                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I appreciate you raising this. We are currently managing a high volume of requests. Could you elaborate on the issue?"</p>
+                    <p class="mb-2"><strong>You:</strong> "The leak is worsening, and I am concerned about mold development. I possess basic plumbing knowledge; would my assistance expedite the repair process?"</p>
+                    <p class="mb-4"><strong>Outcome:</strong> A mutually beneficial plan is developed, addressing both your need for a timely repair and the coordinator's resource constraints. The coordinator agrees to prioritize your repair and provide materials if you can assist.</p>
                 `;
             }
         } else if (scenarioKey === 'scenario2') {
-            // Similar detailed responses for scenario 2
             if (style === 'Competing') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> "I told everyone weeks ago that I needed the room for this date. The form is just a formality."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "But I followed the proper procedure and submitted the form. The rules clearly state that's how reservations work."</p>
-                    <p class="mb-2"><strong>You:</strong> "My event is more important and I announced it first. I'm not changing my plans."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The conflict escalates and may require board intervention. Community harmony is damaged, and neither party feels their concerns are respected.</p>
+                    <p class="mb-2"><strong>You:</strong> "I verbally reserved this room weeks ago. The formal process is merely a bureaucratic formality."</p>
+                    <p class="mb-2"><strong>Other Member:</strong> "I adhered to the established procedure and submitted the required form. The regulations clearly define the reservation protocol."</p>
+                    <p class="mb-2"><strong>You:</strong> "My event is of greater importance, and I announced it first. I will not alter my plans."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> The conflict escalates, potentially necessitating intervention by the board. Community cohesion is compromised, and neither party perceives their concerns as respected.</p>
+                `;
+            } else if (style === 'Accommodating') {
+                results = `
+                    <p class="mb-2"><strong>You:</strong> "I understand I did not complete the official form. You may proceed with your event."</p>
+                    <p class="mb-2"><strong>Other Member:</strong> "Thank you for your understanding. I appreciate your flexibility."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> You concede the room, maintaining a harmonious relationship but sacrificing your event. This may lead to future resentment if your needs are consistently deprioritized.</p>
+                `;
+            } else if (style === 'Avoiding') {
+                results = `
+                    <p class="mb-2"><strong>You:</strong> *Notices the other member setting up in the community room but avoids confrontation.*</p>
+                    <p class="mb-2"><strong>Other Member:</strong> "(To a third party) Glad I got the form in on time!"</p>
+                    <p class="mb-4"><strong>Outcome:</strong> The conflict is unaddressed, and the other member uses the room. Your event is cancelled, and you may feel unheard or undervalued within the cooperative.</p>
+                `;
+            } else if (style === 'Compromising') {
+                results = `
+                    <p class="mb-2"><strong>You:</strong> "It appears we have a scheduling overlap. I informally reserved the room, but I acknowledge you completed the official process."</p>
+                    <p class="mb-2"><strong>Other Member:</strong> "Yes, I followed the procedure. Is there a way we can both use the space, perhaps at different times?"</p>
+                    <p class="mb-2"><strong>You:</strong> "Perhaps we could split the time, or I could use it for a shorter duration if you need the majority of the time."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> You agree to share the room or adjust your schedules, allowing both events to proceed, albeit with some modifications. This demonstrates flexibility and a willingness to find common ground.</p>
                 `;
             } else if (style === 'Collaborating') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> "We seem to have a scheduling conflict. Let's figure out how we can both have successful events."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "I did submit the form, but I understand you had mentioned your plans earlier."</p>
-                    <p class="mb-2"><strong>You:</strong> "What are the specific needs for your event? Maybe we can find a way to share the space or find an alternative that works for both of us."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You discover that one event could be moved to earlier in the day, or that another suitable space is available. Both events proceed successfully, and the experience leads to clearer reservation procedures in the future.</p>
-                `;
-            } else {
-                results = `
-                    <p class="mb-4">Select "Competing" or "Collaborating" style to see detailed results for this scenario.</p>
+                    <p class="mb-2"><strong>You:</strong> "We have a conflict regarding the community room. My objective is to host my event, and I understand you also have a need for the space."</p>
+                    <p class="mb-2"><strong>Other Member:</strong> "Indeed. I followed the formal process, but I am open to finding a solution that works for both of us."</p>
+                    <p class="mb-2"><strong>You:</strong> "Could we explore alternative spaces, or perhaps adjust the timing of our events to allow both to occur without conflict? My event could be shorter if necessary."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> Through open dialogue, you identify a creative solution, such as using an alternative space, rescheduling one event, or co-hosting. Both parties achieve their objectives, and the cooperative benefits from a strengthened problem-solving culture.</p>
                 `;
             }
         } else if (scenarioKey === 'scenario3') {
-            // Similar detailed responses for scenario 3
-            if (style === 'Avoiding') {
+            if (style === 'Competing') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> *Continues to be bothered by the noise but doesn't approach the neighbor again*</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> *Unaware that the noise is still an issue*</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The problem persists, your sleep continues to be disrupted, and resentment builds. You may eventually consider moving out of the cooperative.</p>
+                    <p class="mb-2"><strong>You:</strong> "Your late-night noise is disruptive and unacceptable. This is the third time I've addressed this, and it needs to stop immediately."</p>
+                    <p class="mb-2"><strong>Neighbor:</strong> "I'm entitled to host guests. You're being overly sensitive."</p>
+                    <p class="mb-2"><strong>You:</strong> "I will report this to the board if it continues. Your actions violate community guidelines."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> The interaction escalates into an adversarial exchange, potentially leading to formal complaints and further deterioration of neighborly relations.</p>
+                `;
+            } else if (style === 'Accommodating') {
+                results = `
+                    <p class="mb-2"><strong>You:</strong> "I apologize for mentioning this again, but the noise has been quite loud recently. I understand you enjoy entertaining."</p>
+                    <p class="mb-2"><strong>Neighbor:</strong> "Yes, we do. We try to be mindful, but sometimes it gets late."</p>
+                    <p class="mb-2"><strong>You:</strong> "That's perfectly fine. I just wanted to bring it to your attention."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> You prioritize maintaining a pleasant relationship, but the noise issue remains unresolved. Your discomfort persists, and the neighbor may not perceive the issue as significant.</p>
+                `;
+            } else if (style === 'Avoiding') {
+                results = `
+                    <p class="mb-2"><strong>You:</strong> *Hears loud noise from the neighbor's unit but decides not to engage, instead using earplugs.*</p>
+                    <p class="mb-4"><strong>Outcome:</strong> The noise continues, and your discomfort is unaddressed. You may feel increasingly resentful and isolated, avoiding interaction with the neighbor.</p>
+                `;
+            } else if (style === 'Compromising') {
+                results = `
+                    <p class="mb-2"><strong>You:</strong> "I need to discuss the noise levels. While I appreciate your right to entertain, the late-night volume is impacting my ability to rest."</p>
+                    <p class="mb-2"><strong>Neighbor:</strong> "I understand. We enjoy hosting, but I recognize the need for quiet hours."</p>
+                    <p class="mb-2"><strong>You:</strong> "Could we agree on a specific time, say 11 PM, after which noise levels are significantly reduced?"</p>
+                    <p class="mb-4"><strong>Outcome:</strong> You reach a compromise where the neighbor agrees to reduce noise after a certain hour. While not ideal for either party, it provides a workable solution that respects both needs.</p>
                 `;
             } else if (style === 'Collaborating') {
                 results = `
-                    <p class="mb-2"><strong>You:</strong> "I wanted to talk about the noise issue again. I value you as a neighbor, but I'm still having trouble sleeping when you have late gatherings."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "I thought we had resolved this. My friends and I have been trying to be quieter."</p>
-                    <p class="mb-2"><strong>You:</strong> "I appreciate that effort. Could we work together to find a solution that allows you to socialize while also respecting my need for sleep? Maybe we could identify specific quiet hours or sound-dampening strategies."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You develop a detailed agreement about quiet hours, advance notice for gatherings, and sound-dampening measures. The neighbor better understands the impact of the noise, and you feel your concerns are being taken seriously.</p>
-                `;
-            } else {
-                results = `
-                    <p class="mb-4">Select "Avoiding" or "Collaborating" style to see detailed results for this scenario.</p>
+                    <p class="mb-2"><strong>You:</strong> "I want to find a solution regarding the late-night noise. My concern is the impact on my sleep, and I value our cooperative living environment."</p>
+                    <p class="mb-2"><strong>Neighbor:</strong> "I understand your concern. We enjoy socializing, and I want to ensure we are good neighbors."</p>
+                    <p class="mb-2"><strong>You:</strong> "Could we explore options such as improving sound insulation, shifting social gatherings to earlier times, or utilizing common spaces for louder activities? I am open to suggestions."</p>
+                    <p class="mb-4"><strong>Outcome:</strong> Through collaborative discussion, you identify mutually beneficial strategies, such as adjusting gathering times, utilizing sound-dampening solutions, or designating specific areas for louder activities. This strengthens the neighborly relationship and fosters a more harmonious living environment.</p>
                 `;
             }
         }
         
-        // Update the simulation results
         simulationResults.innerHTML = results;
-        
-        // Update communication style display
-        communicationStyle.innerHTML = `
-            <p class="font-semibold">${style}</p>
-            <p>Assertiveness: ${assertiveness}/10, Cooperativeness: ${cooperativeness}/10</p>
-            <p class="mt-2">This style is characterized by ${getStyleDescription(style)}</p>
-        `;
+        communicationStyle.innerHTML = `<p><strong>Style:</strong> ${style}</p>`;
     });
-    
-    // Helper function to get style descriptions
-    function getStyleDescription(style) {
-        const descriptions = {
-            'Competing': 'high assertiveness and low cooperativeness. You focus on achieving your goals, sometimes at the expense of relationships.',
-            'Accommodating': 'low assertiveness and high cooperativeness. You prioritize others\' needs and maintaining harmony over your own goals.',
-            'Avoiding': 'low assertiveness and low cooperativeness. You tend to withdraw from conflict situations rather than addressing them directly.',
-            'Compromising': 'moderate assertiveness and cooperativeness. You seek middle-ground solutions where everyone gives up something to reach agreement.',
-            'Collaborating': 'high assertiveness and high cooperativeness. You work to find solutions that fully satisfy everyone\'s concerns.',
-            'Mixed': 'a blend of different approaches. Your style may vary depending on the specific aspects of the situation.'
-        };
-        
-        return descriptions[style] || '';
-    }
 }
 
 // ===== Policy Development Wizard =====
@@ -360,149 +368,194 @@ function initPolicyWizard() {
     const policyPreview = document.getElementById('policy-preview');
     const policyContent = document.getElementById('policy-content');
     const downloadPolicy = document.getElementById('download-policy');
-    
+
     if (!policyTypeSelector) return;
-    
-    // Define questions for each policy type
+
     const policyTypes = {
         conflict: {
-            title: 'Conflict Resolution Policy',
-            questions: [
-                {
-                    id: 'conflict-process',
-                    label: 'What process would you like to use for initial conflict resolution?',
-                    type: 'radio',
-                    options: [
-                        'Direct communication between parties first, then facilitated discussion if needed',
-                        'Immediate involvement of a neutral third party',
-                        'Written documentation of concerns before any discussion'
-                    ]
-                },
-                {
-                    id: 'conflict-mediators',
-                    label: 'Who should serve as mediators in your cooperative?',
-                    type: 'checkbox',
-                    options: [
-                        'Trained members from within the cooperative',
-                        'Board members',
-                        'External professional mediators',
-                        'Representatives from other cooperatives'
-                    ]
-                },
-                {
-                    id: 'conflict-timeline',
-                    label: 'What is your preferred timeline for addressing conflicts?',
-                    type: 'select',
-                    options: [
-                        'Initial response within 48 hours, resolution process within 2 weeks',
-                        'Initial response within 1 week, resolution process within 1 month',
-                        'Timeline determined case-by-case based on severity'
-                    ]
-                }
-            ]
+            title: "Conflict Resolution Policy",
+            questions: `
+                <h3 class="text-xl font-semibold mb-3">Conflict Resolution Process</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">What is the preferred process for resolving conflicts?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="process-mediation" name="conflict-process" value="Mediation by a neutral third party." class="mr-2">
+                        <label for="process-mediation">Mediation by a neutral third party</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="process-board" name="conflict-process" value="Direct resolution facilitated by the cooperative board." class="mr-2">
+                        <label for="process-board">Direct resolution facilitated by the cooperative board</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="process-member" name="conflict-process" value="Member-to-member discussion with optional board oversight." class="mr-2">
+                        <label for="process-member">Member-to-member discussion with optional board oversight</label>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-3">Mediator Selection</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">Who can serve as mediators?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="mediator-internal" name="conflict-mediators" value="Trained internal cooperative members." class="mr-2">
+                        <label for="mediator-internal">Trained internal cooperative members</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="mediator-external" name="conflict-mediators" value="External professional mediators." class="mr-2">
+                        <label for="mediator-external">External professional mediators</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="mediator-board" name="conflict-mediators" value="Designated board members." class="mr-2">
+                        <label for="mediator-board">Designated board members</label>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-3">Resolution Timeline</h3>
+                <div class="mb-4">
+                    <label class="block mb-2" for="conflict-timeline">What is the expected timeline for conflict resolution (e.g., 30 days)?</label>
+                    <input type="text" id="conflict-timeline" class="w-full p-2 border border-gray-300 rounded" placeholder="e.g., 30 days">
+                </div>
+            `
         },
         communication: {
-            title: 'Communication Policy',
-            questions: [
-                {
-                    id: 'comm-channels',
-                    label: 'Which communication channels should your cooperative use?',
-                    type: 'checkbox',
-                    options: [
-                        'Email',
-                        'Physical bulletin board',
-                        'Digital messaging platform (e.g., Slack)',
-                        'Regular in-person meetings',
-                        'Newsletter',
-                        'Website'
-                    ]
-                },
-                {
-                    id: 'comm-frequency',
-                    label: 'How frequently should official cooperative communications be sent?',
-                    type: 'radio',
-                    options: [
-                        'Weekly updates',
-                        'Bi-weekly updates',
-                        'Monthly updates with urgent matters communicated immediately'
-                    ]
-                }
-            ]
+            title: "Communication Policy",
+            questions: `
+                <h3 class="text-xl font-semibold mb-3">Communication Channels</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">Which communication channels will be primarily utilized?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="channel-email" name="comm-channels" value="Email (official announcements, newsletters)." class="mr-2">
+                        <label for="channel-email">Email (official announcements, newsletters)</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="channel-board" name="comm-channels" value="Physical notice board (for general information)." class="mr-2">
+                        <label for="channel-board">Physical notice board (for general information)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="channel-online" name="comm-channels" value="Online forum/messaging platform (for member discussions)." class="mr-2">
+                        <label for="channel-online">Online forum/messaging platform (for member discussions)</label>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-3">Communication Frequency</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">What is the desired frequency of official communications?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="frequency-weekly" name="comm-frequency" value="Weekly." class="mr-2">
+                        <label for="frequency-weekly">Weekly</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="frequency-biweekly" name="comm-frequency" value="Bi-weekly." class="mr-2">
+                        <label for="frequency-biweekly">Bi-weekly</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="frequency-monthly" name="comm-frequency" value="Monthly." class="mr-2">
+                        <label for="frequency-monthly">Monthly</label>
+                    </div>
+                </div>
+            `
+        },
+        participation: {
+            title: "Member Participation Policy",
+            questions: `
+                <h3 class="text-xl font-semibold mb-3">Participation Expectations</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">What are the expectations for member participation?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="participation-mandatory" name="participation-level" value="Mandatory attendance at general meetings and committees." class="mr-2">
+                        <label for="participation-mandatory">Mandatory attendance at general meetings and committees</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="participation-encouraged" name="participation-level" value="Encouraged participation in cooperative activities and decision-making." class="mr-2">
+                        <label for="participation-encouraged">Encouraged participation in cooperative activities and decision-making</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="participation-voluntary" name="participation-level" value="Voluntary engagement in cooperative initiatives." class="mr-2">
+                        <label for="participation-voluntary">Voluntary engagement in cooperative initiatives</label>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-3">Contribution Areas</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">In which areas are member contributions particularly valued?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="contribution-governance" name="contribution-areas" value="Governance and policy development." class="mr-2">
+                        <label for="contribution-governance">Governance and policy development</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="contribution-maintenance" name="contribution-areas" value="Maintenance and upkeep of common areas." class="mr-2">
+                        <label for="contribution-maintenance">Maintenance and upkeep of common areas</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="contribution-social" name="contribution-areas" value="Organizing social events and community building activities." class="mr-2">
+                        <label for="contribution-social">Organizing social events and community building activities</label>
+                    </div>
+                </div>
+            `
+        },
+        'common-space': {
+            title: "Common Space Usage Policy",
+            questions: `
+                <h3 class="text-xl font-semibold mb-3">Booking Procedure</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">What is the procedure for booking common spaces?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="booking-online" name="booking-procedure" value="Online booking system with calendar." class="mr-2">
+                        <label for="booking-online">Online booking system with calendar</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="booking-physical" name="booking-procedure" value="Physical sign-up sheet at the common space." class="mr-2">
+                        <label for="booking-physical">Physical sign-up sheet at the common space</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="booking-contact" name="booking-procedure" value="Contacting a designated board member or committee." class="mr-2">
+                        <label for="booking-contact">Contacting a designated board member or committee</label>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-3">Usage Guidelines</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">What are the key guidelines for using common spaces?</label>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="guideline-cleanliness" name="usage-guidelines" value="Users are responsible for cleaning the space after use." class="mr-2">
+                        <label for="guideline-cleanliness">Users are responsible for cleaning the space after use</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="guideline-noise" name="usage-guidelines" value="Noise levels must be kept to a minimum during specified hours." class="mr-2">
+                        <label for="guideline-noise">Noise levels must be kept to a minimum during specified hours</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="guideline-damage" name="usage-guidelines" value="Any damage to the space or its contents must be reported immediately." class="mr-2">
+                        <label for="guideline-damage">Any damage to the space or its contents must be reported immediately</label>
+                    </div>
+                </div>
+            `
         }
-        // Additional policy types can be added here
     };
-    
-    // Show questions when policy type is selected
+
     policyTypeSelector.addEventListener('change', function() {
-        const selectedPolicy = policyTypes[this.value];
-        
-        if (!selectedPolicy) {
+        const selectedType = this.value;
+        if (selectedType && policyTypes[selectedType]) {
+            policyQuestions.innerHTML = policyTypes[selectedType].questions;
+            policyQuestions.classList.remove('hidden');
+            policyPreview.classList.add('hidden'); // Hide preview when questions change
+        } else {
+            policyQuestions.innerHTML = '';
             policyQuestions.classList.add('hidden');
             policyPreview.classList.add('hidden');
-            return;
         }
-        
-        // Generate questions for the selected policy type
-        let questionsHTML = `
-            <h3 class="text-xl font-semibold mb-4">${selectedPolicy.title} Questions</h3>
-            <form id="policy-form" class="space-y-6">
-        `;
-        
-        selectedPolicy.questions.forEach(question => {
-            questionsHTML += `<div class="mb-4">
-                <label class="block font-medium mb-2">${question.label}</label>
-            `;
-            
-            if (question.type === 'radio') {
-                question.options.forEach((option, index) => {
-                    questionsHTML += `
-                        <div class="mb-2">
-                            <input type="radio" id="${question.id}-${index}" name="${question.id}" value="${option}" class="mr-2">
-                            <label for="${question.id}-${index}">${option}</label>
-                        </div>
-                    `;
-                });
-            } else if (question.type === 'checkbox') {
-                question.options.forEach((option, index) => {
-                    questionsHTML += `
-                        <div class="mb-2">
-                            <input type="checkbox" id="${question.id}-${index}" name="${question.id}" value="${option}" class="mr-2">
-                            <label for="${question.id}-${index}">${option}</label>
-                        </div>
-                    `;
-                });
-            } else if (question.type === 'select') {
-                questionsHTML += `<select id="${question.id}" name="${question.id}" class="w-full p-2 border border-gray-300 rounded">`;
-                questionsHTML += `<option value="">-- Select an option --</option>`;
-                
-                question.options.forEach((option, index) => {
-                    questionsHTML += `<option value="${option}">${option}</option>`;
-                });
-                
-                questionsHTML += `</select>`;
-            }
-            
-            questionsHTML += `</div>`;
-        });
-        
-        questionsHTML += `
-            <div class="mt-6">
-                <button type="button" id="generate-policy" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-                    Generate Policy
-                </button>
-            </div>
-            </form>
-        `;
-        
-        policyQuestions.innerHTML = questionsHTML;
-        policyQuestions.classList.remove('hidden');
-        
-        // Add event listener to the generate policy button
-        document.getElementById('generate-policy').addEventListener('click', function() {
-            generatePolicy(policyTypeSelector.value);
-        });
     });
-    
+
+    // Add a button to generate the policy
+    const generateButton = document.createElement('button');
+    generateButton.id = 'generate-policy';
+    generateButton.className = 'bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4';
+    generateButton.textContent = 'Generate Policy';
+    policyQuestions.parentNode.insertBefore(generateButton, policyQuestions.nextSibling);
+
+    generateButton.addEventListener('click', function() {
+        generatePolicy(policyTypeSelector.value);
+    });
+
     // Generate policy based on form inputs
     function generatePolicy(policyType) {
         const selectedPolicy = policyTypes[policyType];
@@ -527,16 +580,16 @@ function initPolicyWizard() {
             
             policyHTML += `
                 <h2 class="text-xl font-semibold mb-2">Conflict Resolution Process</h2>
-                <p class="mb-4">${processValue || 'The cooperative will use a structured process for resolving conflicts.'}</p>
+                <p class="mb-4">${processValue || 'The cooperative will utilize a structured process for conflict resolution.'}</p>
                 
                 <h2 class="text-xl font-semibold mb-2">Mediators</h2>
-                <p class="mb-4">The following individuals may serve as mediators:</p>
+                <p class="mb-4">The following individuals are authorized to serve as mediators:</p>
                 <ul class="list-disc pl-5 mb-4">
                     ${mediators.map(m => `<li>${m}</li>`).join('') || '<li>To be determined by the board</li>'}
                 </ul>
                 
-                <h2 class="text-xl font-semibold mb-2">Timeline</h2>
-                <p class="mb-4">${timeline || 'Timeline will be established on a case-by-case basis.'}</p>
+                <h2 class="text-xl font-semibold mb-2">Resolution Timeline</h2>
+                <p class="mb-4">${timeline || 'A timeline will be established on a case-by-case basis.'}</p>
             `;
         } else if (policyType === 'communication') {
             // Get form values
@@ -545,19 +598,47 @@ function initPolicyWizard() {
             
             policyHTML += `
                 <h2 class="text-xl font-semibold mb-2">Communication Channels</h2>
-                <p class="mb-4">The cooperative will use the following communication channels:</p>
+                <p class="mb-4">The cooperative will employ the following communication channels:</p>
                 <ul class="list-disc pl-5 mb-4">
                     ${channels.map(c => `<li>${c}</li>`).join('') || '<li>To be determined by the board</li>'}
                 </ul>
                 
                 <h2 class="text-xl font-semibold mb-2">Communication Frequency</h2>
-                <p class="mb-4">${frequency || 'Communication frequency will be determined based on cooperative needs.'}</p>
+                <p class="mb-4">${frequency || 'Communication frequency will be determined based on cooperative requirements.'}</p>
+            `;
+        } else if (policyType === 'participation') {
+            const participationLevel = getRadioValue('participation-level');
+            const contributionAreas = getCheckboxValues('contribution-areas');
+
+            policyHTML += `
+                <h2 class="text-xl font-semibold mb-2">Member Participation Expectations</h2>
+                <p class="mb-4">${participationLevel || 'Expectations for member participation will be defined.'}</p>
+                
+                <h2 class="text-xl font-semibold mb-2">Valued Contribution Areas</h2>
+                <p class="mb-4">Member contributions are particularly valued in the following areas:</p>
+                <ul class="list-disc pl-5 mb-4">
+                    ${contributionAreas.map(a => `<li>${a}</li>`).join('') || '<li>To be determined by the board</li>'}
+                </ul>
+            `;
+        } else if (policyType === 'common-space') {
+            const bookingProcedure = getRadioValue('booking-procedure');
+            const usageGuidelines = getCheckboxValues('usage-guidelines');
+
+            policyHTML += `
+                <h2 class="text-xl font-semibold mb-2">Common Space Booking Procedure</h2>
+                <p class="mb-4">${bookingProcedure || 'A procedure for booking common spaces will be established.'}</p>
+                
+                <h2 class="text-xl font-semibold mb-2">Common Space Usage Guidelines</h2>
+                <p class="mb-4">Key guidelines for common space usage include:</p>
+                <ul class="list-disc pl-5 mb-4">
+                    ${usageGuidelines.map(g => `<li>${g}</li>`).join('') || '<li>To be determined by the board</li>'}
+                </ul>
             `;
         }
         
         policyHTML += `
-            <h2 class="text-xl font-semibold mb-2">Review</h2>
-            <p class="mb-4">This policy will be reviewed annually by the board of directors.</p>
+            <h2 class="text-xl font-semibold mb-2">Review Protocol</h2>
+            <p class="mb-4">This policy will undergo an annual review by the board of directors.</p>
             
             <p class="mt-8">Adopted: [Date]</p>
             <p>Last Reviewed: [Date]</p>
@@ -611,4 +692,5 @@ function initPolicyWizard() {
         document.body.removeChild(element);
     });
 }
+
 
