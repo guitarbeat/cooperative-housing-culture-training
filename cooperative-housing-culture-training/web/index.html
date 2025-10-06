@@ -6,10 +6,16 @@
     <title>Cooperative Housing Culture & Conflict Resolution for Trustees</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <script src="https://d3js.org/d3.v7.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1" defer></script>
+    <meta name="description" content="Interactive training tools for cooperative housing trustees focusing on conflict resolution, communication strategies, and policy development.">
+    <meta name="keywords" content="cooperative housing, trustees, conflict resolution, communication, policy development, governance">
+    <meta name="author" content="Cooperative Housing Culture Training">
 </head>
 <body class="bg-gray-50 font-sans">
+    <!-- Skip navigation for screen readers -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50">Skip to main content</a>
+    
     <header class="bg-gradient-to-r from-blue-700 to-green-500 text-white py-8">
         <div class="container mx-auto px-4">
             <h1 class="text-4xl font-bold mb-2">Cooperative Housing Culture & Conflict Resolution</h1>
@@ -17,18 +23,18 @@
         </div>
     </header>
 
-    <nav class="bg-white shadow-md">
+    <nav class="bg-white shadow-md" role="navigation" aria-label="Main navigation">
         <div class="container mx-auto px-4">
-            <ul class="flex flex-wrap py-4">
-                <li class="mr-6"><a href="#conflict-flowchart" class="text-blue-700 hover:text-blue-900 font-medium">Conflict Resolution Framework</a></li>
-                <li class="mr-6"><a href="#communication-simulator" class="text-blue-700 hover:text-blue-900 font-medium">Effective Communication Simulation</a></li>
-                <li class="mr-6"><a href="#policy-wizard" class="text-blue-700 hover:text-blue-900 font-medium">Policy Development Assistant</a></li>
-                <li class="mr-6"><a href="#resources" class="text-blue-700 hover:text-blue-900 font-medium">Resources for Trustees</a></li>
+            <ul class="flex flex-wrap py-4" role="menubar">
+                <li class="mr-6" role="none"><a href="#conflict-flowchart" class="text-blue-700 hover:text-blue-900 font-medium" role="menuitem" aria-label="Navigate to Conflict Resolution Framework section">Conflict Resolution Framework</a></li>
+                <li class="mr-6" role="none"><a href="#communication-simulator" class="text-blue-700 hover:text-blue-900 font-medium" role="menuitem" aria-label="Navigate to Communication Simulation section">Effective Communication Simulation</a></li>
+                <li class="mr-6" role="none"><a href="#policy-wizard" class="text-blue-700 hover:text-blue-900 font-medium" role="menuitem" aria-label="Navigate to Policy Development Assistant section">Policy Development Assistant</a></li>
+                <li class="mr-6" role="none"><a href="#resources" class="text-blue-700 hover:text-blue-900 font-medium" role="menuitem" aria-label="Navigate to Resources section">Resources for Trustees</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="container mx-auto px-4 py-8">
+    <main id="main-content" class="container mx-auto px-4 py-8">
         <section class="mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6">Welcome, Cooperative Trustees</h2>
             <p class="text-lg mb-4">
@@ -50,66 +56,87 @@
             </div>
         </section>
 
-        <section id="conflict-flowchart" class="mb-12 bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Strategic Conflict Resolution Framework</h2>
+        <section id="conflict-flowchart" class="mb-12 bg-white rounded-lg shadow-md p-8" aria-labelledby="flowchart-heading">
+            <h2 id="flowchart-heading" class="text-2xl font-bold text-gray-800 mb-4">Strategic Conflict Resolution Framework</h2>
             <p class="mb-6">Navigate complex conflict resolution processes with this interactive framework. Each step provides detailed guidance and strategic considerations for trustees.</p>
             
-            <div class="flowchart-container h-96 border border-gray-200 rounded-lg p-4 bg-gray-50">
+            <div class="flowchart-container h-96 border border-gray-200 rounded-lg p-4 bg-gray-50" 
+                 role="img" 
+                 aria-label="Interactive conflict resolution flowchart with six steps: Acknowledge Conflict, Gather Information, Identify Core Interests, Generate Solutions, Evaluate & Select Solutions, and Implement & Follow Up"
+                 tabindex="0">
                 <!-- Flowchart will be rendered here by JavaScript -->
                 <p class="text-center text-gray-500 mt-20">Loading flowchart...</p>
             </div>
             
-            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                <h3 class="font-semibold mb-2">Framework Details</h3>
-                <div id="step-details">
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg" role="region" aria-labelledby="details-heading">
+                <h3 id="details-heading" class="font-semibold mb-2">Framework Details</h3>
+                <div id="step-details" role="region" aria-live="polite" aria-label="Selected step details">
                     <p>Click on a step in the flowchart above to see detailed information.</p>
                 </div>
             </div>
         </section>
 
-        <section id="communication-simulator" class="mb-12 bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Advanced Communication Style Simulator</h2>
+        <section id="communication-simulator" class="mb-12 bg-white rounded-lg shadow-md p-8" aria-labelledby="simulator-heading">
+            <h2 id="simulator-heading" class="text-2xl font-bold text-gray-800 mb-4">Advanced Communication Style Simulator</h2>
             <p class="mb-6">Refine your communication strategies in common cooperative scenarios. Observe how different leadership communication styles influence outcomes.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                     <h3 class="text-xl font-semibold mb-3">Scenario Analysis</h3>
-                    <select id="scenario-selector" class="w-full p-2 border border-gray-300 rounded mb-4">
+                    <label for="scenario-selector" class="block mb-2 font-medium">Select a scenario to analyze:</label>
+                    <select id="scenario-selector" class="w-full p-2 border border-gray-300 rounded mb-4" aria-describedby="scenario-description">
                         <option value="scenario1">Maintenance Request Resolution</option>
                         <option value="scenario2">Common Space Scheduling Conflict</option>
                         <option value="scenario3">Noise Disturbance Discussion</option>
                     </select>
                     
-                    <div id="scenario-description" class="bg-gray-50 p-4 rounded-lg mb-4">
+                    <div id="scenario-description" class="bg-gray-50 p-4 rounded-lg mb-4" role="region" aria-live="polite">
                         <p>Select a scenario for detailed analysis.</p>
                     </div>
                     
                     <h3 class="text-xl font-semibold mb-3">Leadership Communication Approach</h3>
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
-                            <label class="block mb-2">Assertiveness</label>
-                            <input type="range" min="1" max="10" value="5" class="w-full" id="assertiveness-slider">
+                            <label for="assertiveness-slider" class="block mb-2">Assertiveness (1-10)</label>
+                            <input type="range" min="1" max="10" value="5" class="w-full" id="assertiveness-slider" 
+                                   aria-label="Assertiveness level from 1 (low) to 10 (high)">
+                            <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
                         </div>
                         <div>
-                            <label class="block mb-2">Cooperativeness</label>
-                            <input type="range" min="1" max="10" value="5" class="w-full" id="cooperativeness-slider">
+                            <label for="cooperativeness-slider" class="block mb-2">Cooperativeness (1-10)</label>
+                            <input type="range" min="1" max="10" value="5" class="w-full" id="cooperativeness-slider"
+                                   aria-label="Cooperativeness level from 1 (low) to 10 (high)">
+                            <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <button id="simulate-button" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                    <button id="simulate-button" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700" 
+                            aria-describedby="simulation-results">
                         Simulate Leadership Response
                     </button>
                 </div>
                 
                 <div>
                     <h3 class="text-xl font-semibold mb-3">Simulation Outcomes</h3>
-                    <div id="simulation-results" class="bg-gray-50 p-4 rounded-lg h-64 overflow-y-auto">
+                    <div id="simulation-results" class="bg-gray-50 p-4 rounded-lg h-64 overflow-y-auto" 
+                         role="region" 
+                         aria-live="polite" 
+                         aria-label="Simulation results and conversation outcomes">
                         <p class="text-gray-500">Outcomes will appear here after simulation.</p>
                     </div>
                     
                     <div class="mt-4">
                         <h4 class="font-semibold mb-2">Your Leadership Style:</h4>
-                        <div id="communication-style" class="p-3 bg-blue-50 rounded-lg">
+                        <div id="communication-style" class="p-3 bg-blue-50 rounded-lg" 
+                             role="region" 
+                             aria-live="polite" 
+                             aria-label="Detected leadership communication style">
                             <p>Adjust the sliders and run the simulation to analyze your style.</p>
                         </div>
                     </div>
@@ -117,14 +144,17 @@
             </div>
         </section>
 
-        <section id="policy-wizard" class="mb-12 bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Policy Development Assistant for Trustees</h2>
+        <section id="policy-wizard" class="mb-12 bg-white rounded-lg shadow-md p-8" aria-labelledby="wizard-heading">
+            <h2 id="wizard-heading" class="text-2xl font-bold text-gray-800 mb-4">Policy Development Assistant for Trustees</h2>
             <p class="mb-6">Generate customized cooperative policies by responding to key questions regarding your community's strategic needs and core values.</p>
             
             <div class="policy-wizard-container">
                 <div class="mb-6">
                     <h3 class="text-xl font-semibold mb-3">Select Policy Type</h3>
-                    <select id="policy-type-selector" class="w-full p-2 border border-gray-300 rounded">
+                    <label for="policy-type-selector" class="block mb-2 font-medium">Choose the type of policy to generate:</label>
+                    <select id="policy-type-selector" class="w-full p-2 border border-gray-300 rounded" 
+                            aria-describedby="policy-questions" 
+                            aria-controls="policy-questions policy-preview">
                         <option value="">-- Select a policy type --</option>
                         <option value="conflict">Conflict Resolution Policy</option>
                         <option value="communication">Communication Policy</option>
@@ -133,17 +163,21 @@
                     </select>
                 </div>
                 
-                <div id="policy-questions" class="hidden">
+                <div id="policy-questions" class="hidden" role="region" aria-labelledby="questions-heading">
                     <!-- Questions will be dynamically loaded based on policy type -->
                 </div>
                 
-                <div id="policy-preview" class="hidden">
-                    <h3 class="text-xl font-semibold mb-3">Policy Preview</h3>
-                    <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                <div id="policy-preview" class="hidden" role="region" aria-labelledby="preview-heading">
+                    <h3 id="preview-heading" class="text-xl font-semibold mb-3">Policy Preview</h3>
+                    <div class="border border-gray-300 rounded-lg p-4 bg-gray-50" 
+                         role="region" 
+                         aria-live="polite" 
+                         aria-label="Generated policy content">
                         <div id="policy-content"></div>
                     </div>
                     <div class="mt-4 flex justify-end">
-                        <button id="download-policy" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
+                        <button id="download-policy" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+                                aria-label="Download the generated policy as a text file">
                             Download Policy
                         </button>
                     </div>
@@ -151,27 +185,31 @@
             </div>
         </section>
 
-        <section id="resources" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Essential Resources for Trustees</h2>
+        <section id="resources" class="mb-12" aria-labelledby="resources-heading">
+            <h2 id="resources-heading" class="text-2xl font-bold text-gray-800 mb-6">Essential Resources for Trustees</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-semibold mb-3">Downloadable Governance Materials</h3>
-                    <ul class="space-y-2">
-                        <li><a href="../docs/workbook/worksheets/communication_assessment.md" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                    <ul class="space-y-2" role="list">
+                        <li role="listitem"><a href="../docs/workbook/worksheets/communication_assessment.md" class="text-blue-600 hover:underline flex items-center" 
+                            aria-label="Download Strategic Communication Assessment Worksheet (Markdown file)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
                             Strategic Communication Assessment Worksheet
                         </a></li>
-                        <li><a href="../docs/workbook/worksheets/conflict_styles_inventory.md" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                        <li role="listitem"><a href="../docs/workbook/worksheets/conflict_styles_inventory.md" class="text-blue-600 hover:underline flex items-center"
+                            aria-label="Download Leadership Conflict Styles Inventory (Markdown file)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
                             Leadership Conflict Styles Inventory
                         </a></li>
-                        <li><a href="../docs/activities/mad_sad_glad_exercise.md" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                        <li role="listitem"><a href="../docs/activities/mad_sad_glad_exercise.md" class="text-blue-600 hover:underline flex items-center"
+                            aria-label="Download Strategic Action Planning Template (Markdown file)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
                             Strategic Action Planning Template
                         </a></li>
-                        <li><a href="../resources/policy_templates/conflict_resolution_policy.md" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                        <li role="listitem"><a href="../resources/policy_templates/conflict_resolution_policy.md" class="text-blue-600 hover:underline flex items-center"
+                            aria-label="Download Comprehensive Policy Templates Bundle (Markdown file)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
                             Comprehensive Policy Templates Bundle
                         </a></li>
                     </ul>
@@ -179,21 +217,25 @@
                 
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-semibold mb-3">External Governance Resources</h3>
-                    <ul class="space-y-2">
-                        <li><a href="https://www.nasco.coop/resources" target="_blank" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+                    <ul class="space-y-2" role="list">
+                        <li role="listitem"><a href="https://www.nasco.coop/resources" target="_blank" class="text-blue-600 hover:underline flex items-center"
+                            aria-label="Visit NASCO Governance Resources (opens in new tab)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
                             NASCO Governance Resources
                         </a></li>
-                        <li><a href="https://www.housinginternational.coop" target="_blank" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+                        <li role="listitem"><a href="https://www.housinginternational.coop" target="_blank" class="text-blue-600 hover:underline flex items-center"
+                            aria-label="Visit Cooperative Housing International Best Practices (opens in new tab)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
                             Cooperative Housing International Best Practices
                         </a></li>
-                        <li><a href="https://www.ncbaclusa.coop" target="_blank" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+                        <li role="listitem"><a href="https://www.ncbaclusa.coop" target="_blank" class="text-blue-600 hover:underline flex items-center"
+                            aria-label="Visit National Cooperative Business Association Governance (opens in new tab)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
                             National Cooperative Business Association Governance
                         </a></li>
-                        <li><a href="https://www.cultivate.coop" target="_blank" class="text-blue-600 hover:underline flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+                        <li role="listitem"><a href="https://www.cultivate.coop" target="_blank" class="text-blue-600 hover:underline flex items-center"
+                            aria-label="Visit Cultivate.Coop Trustee Wiki (opens in new tab)">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
                             Cultivate.Coop Trustee Wiki
                         </a></li>
                     </ul>
