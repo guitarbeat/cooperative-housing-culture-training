@@ -563,13 +563,22 @@ function initPolicyWizard() {
         const selectedPolicy = policyTypes[policyType];
         if (!selectedPolicy) return;
         
+        const purposeDescriptions = {
+            conflict: 'resolving conflicts',
+            communication: 'effective communication',
+            participation: 'supporting active participation',
+            'common-space': 'using shared common spaces'
+        };
+
+        const purposeText = purposeDescriptions[policyType] || 'supporting our cooperative community';
+
         let policyHTML = `
             <h1 class="text-2xl font-bold mb-4">${selectedPolicy.title}</h1>
             <p class="mb-4">For [Cooperative Name]</p>
-            
+
             <h2 class="text-xl font-semibold mb-2">Purpose</h2>
-            <p class="mb-4">This policy establishes guidelines for ${policyType === 'conflict' ? 'resolving conflicts' : 'effective communication'} within our cooperative community.</p>
-            
+            <p class="mb-4">This policy establishes guidelines for ${purposeText} within our cooperative community.</p>
+
             <h2 class="text-xl font-semibold mb-2">Scope</h2>
             <p class="mb-4">This policy applies to all members of the cooperative.</p>
         `;
