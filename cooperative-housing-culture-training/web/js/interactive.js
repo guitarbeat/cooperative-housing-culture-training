@@ -3,9 +3,9 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all interactive components
-    initConflictFlowchart();
-    initCommunicationSimulator();
-    initPolicyWizard();
+    if (document.querySelector('.flowchart-container')) initConflictFlowchart();
+    if (document.getElementById('scenario-selector')) initCommunicationSimulator();
+    if (document.getElementById('policy-type-selector')) initPolicyWizard();
 });
 
 // ===== Conflict Resolution Flowchart =====
@@ -13,7 +13,14 @@ function initConflictFlowchart() {
     const flowchartContainer = document.querySelector('.flowchart-container');
     const stepDetails = document.getElementById('step-details');
     
+    // Check if flowchart container exists first
     if (!flowchartContainer) return;
+
+    // Check if D3 is loaded
+    if (typeof d3 === 'undefined') {
+        flowchartContainer.innerHTML = '<p class="text-center text-red-500 mt-20">Error: D3.js library not loaded.</p>';
+        return;
+    }
     
     // Define the flowchart steps
     const steps = [
@@ -78,6 +85,7 @@ function initConflictFlowchart() {
     
     // Create SVG element for the flowchart
     const svg = d3.select('.flowchart-container')
+        .html('')
         .append('svg')
         .attr('width', '100%')
         .attr('height', '100%')

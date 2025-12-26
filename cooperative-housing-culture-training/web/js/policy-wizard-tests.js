@@ -1,12 +1,19 @@
 QUnit.module('Policy Development Wizard', function(hooks) {
   hooks.beforeEach(function() {
-    // The `initPolicyWizard` function is called when the DOM is ready,
-    // which QUnit handles for us.
+    // Re-initialize the wizard because QUnit resets the fixture
+    initPolicyWizard();
   });
 
   QUnit.test('"Generate Policy" button visibility', function(assert) {
     const policySelector = document.getElementById('policy-type-selector');
-    const generateButton = document.getElementById('generate-policy');
+
+    // The generate button is created dynamically by initPolicyWizard
+    let generateButton = document.getElementById('generate-policy');
+
+    if (!generateButton) {
+        assert.ok(false, "Generate button not found in DOM");
+        return;
+    }
 
     // 1. Check that the button is hidden on initial load.
     assert.ok(generateButton.classList.contains('hidden'), 'Button is hidden initially');
