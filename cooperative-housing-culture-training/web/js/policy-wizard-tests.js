@@ -2,14 +2,25 @@ QUnit.module('Policy Development Wizard', function(hooks) {
   hooks.beforeEach(function() {
     // The `initPolicyWizard` function is called when the DOM is ready,
     // which QUnit handles for us.
+    // However, since we are re-running tests, we might need to re-initialize or clean up.
+    // In this specific test setup, the fixture is reset by QUnit, but the JS logic attaches event listeners on DOMContentLoaded.
+    // Since DOMContentLoaded happened long ago, we need to manually trigger the initialization for the new fixture.
+
+    // Check if initPolicyWizard is available (it should be global)
+    if (typeof initPolicyWizard === 'function') {
+        initPolicyWizard();
+    }
   });
 
   QUnit.test('"Generate Policy" button visibility', function(assert) {
     const policySelector = document.getElementById('policy-type-selector');
-    const generateButton = document.getElementById('generate-policy');
+
+    // initPolicyWizard creates the button dynamically
+    let generateButton = document.getElementById('generate-policy');
 
     // 1. Check that the button is hidden on initial load.
-    assert.ok(generateButton.classList.contains('hidden'), 'Button is hidden initially');
+    // When created, it has class 'hidden'.
+    assert.ok(generateButton && generateButton.classList.contains('hidden'), 'Button is hidden initially');
 
     // 2. Simulate selecting a policy type.
     policySelector.value = 'conflict';

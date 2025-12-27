@@ -19,6 +19,40 @@
     <button id="download-policy"></button>
   </div>
   <script src="https://code.jquery.com/qunit/qunit-2.20.0.js"></script>
+  <!-- Mock D3 for tests -->
+  <script>
+    window.d3 = {
+      select: () => ({
+        append: () => ({
+          attr: () => ({
+            attr: () => ({
+               attr: () => {},
+               text: () => {},
+               style: () => {}
+            }),
+            style: () => {},
+            text: () => {}
+          }),
+          style: () => {},
+          text: () => {}
+        }),
+        selectAll: () => ({
+          data: () => ({
+             enter: () => ({
+               append: () => ({
+                  attr: () => ({
+                     style: () => ({
+                        on: () => {}
+                     }),
+                     text: () => {}
+                  })
+               })
+             })
+          })
+        })
+      })
+    };
+  </script>
   <script src="js/interactive.js"></script>
   <script src="js/policy-wizard-tests.js"></script>
 </body>

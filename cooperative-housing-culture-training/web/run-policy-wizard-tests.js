@@ -46,7 +46,15 @@ async function runTests() {
 
     try {
         await page.goto(`http://localhost:${PORT}/policy-wizard-test-runner.html`);
-        await page.waitForSelector('#qunit-test-output', { timeout: 10000 });
+        // Wait for the Quinit banner element which indicates tests have run
+        await page.waitForSelector('#qunit-banner', { timeout: 10000 });
+
+        // Wait until the banner has a class indicating pass or fail
+        await page.waitForFunction(() => {
+             const banner = document.querySelector('#qunit-banner');
+             return banner && (banner.classList.contains('qunit-pass') || banner.classList.contains('qunit-fail'));
+        }, { timeout: 10000 });
+
 
         const testResult = await page.evaluate(() => {
             const banner = document.querySelector('#qunit-banner');
