@@ -1,6 +1,240 @@
 // Cooperative Housing Culture & Conflict Resolution Training
 // Interactive Components JavaScript
 
+// Hoist static data to top-level scope to avoid re-allocation
+const FLOWCHART_STEPS = [
+    {
+        id: 'step1',
+        title: 'Acknowledge Conflict',
+        description: 'Recognize that a conflict exists and requires attention.',
+        details: 'Effective conflict resolution begins with acknowledging the presence of a dispute. This involves recognizing indicators such as increased tension, avoidance behaviors, or direct complaints. Approach the situation with an objective and curious mindset, rather than a judgmental one. Understand that conflict is an inherent aspect of communal living and, when managed effectively, can foster positive growth and strengthen cooperative bonds.',
+        x: 100,
+        y: 50,
+        next: ['step2']
+    },
+    {
+        id: 'step2',
+        title: 'Gather Information',
+        description: 'Collect comprehensive facts and diverse perspectives from all involved parties.',
+        details: 'Before attempting resolution, it is crucial to acquire a complete understanding of the situation. Conduct separate discussions with each party to ascertain their individual perspectives. Employ open-ended questions, such as "What transpired?" and "How did this affect you?" Document pertinent details objectively, refraining from assigning blame. Seek verifiable information to clarify the circumstances.',
+        x: 100,
+        y: 150,
+        next: ['step3']
+    },
+    {
+        id: 'step3',
+        title: 'Identify Core Interests',
+        description: 'Move beyond stated positions to understand underlying needs and motivations.',
+        details: 'Distinguish between \'positions\' (what individuals explicitly state they desire) and \'interests\' (the fundamental reasons behind those desires). For instance, a position might be "I require extended quiet hours," whereas the underlying interest is "I need uninterrupted rest." Identifying these core interests often reveals multiple viable solutions that can satisfy the essential needs of all parties. Ask "Why is this significant to you?" to uncover these deeper motivations.',
+        x: 100,
+        y: 250,
+        next: ['step4']
+    },
+    {
+        id: 'step4',
+        title: 'Generate Solutions',
+        description: 'Brainstorm a range of options that address the identified core interests.',
+        details: 'Foster a collaborative environment where all participants contribute ideas freely. During this phase, prioritize the generation of numerous potential solutions without immediate evaluation or criticism. Encourage innovative thinking and the development of ideas based on previous suggestions. Consider successful approaches from similar past situations. The objective is to maximize the quantity of ideas before assessing their quality.',
+        x: 300,
+        y: 250,
+        next: ['step5']
+    },
+    {
+        id: 'step5',
+        title: 'Evaluate & Select Solutions',
+        description: 'Choose the most effective options that align with shared needs and cooperative values.',
+        details: 'Assess each proposed solution against objective criteria, including fairness, practicality, and adherence to cooperative principles. Consider both immediate and long-term implications. Prioritize solutions that address the most critical interests of all stakeholders. Formalize the agreed-upon solution with precise details regarding its implementation.',
+        x: 300,
+        y: 150,
+        next: ['step6']
+    },
+    {
+        id: 'step6',
+        title: 'Implement & Follow Up',
+        description: 'Execute the chosen solutions and monitor their effectiveness.',
+        details: 'Develop a clear implementation plan that includes specific actions, assigned responsibilities, and defined timelines. Schedule regular check-ins to evaluate the efficacy of the solution and make necessary adjustments. Acknowledge and celebrate successful resolutions, recognizing the contributions of all participants. Document lessons learned to inform future conflict resolution processes.',
+        x: 300,
+        y: 50,
+        next: []
+    }
+];
+
+const COMMUNICATION_SCENARIOS = {
+    scenario1: {
+        title: "Maintenance Request Resolution",
+        description: "A member has repeatedly submitted maintenance requests for a persistent faucet leak, yet repairs remain incomplete. They confront the maintenance coordinator at a community event, expressing significant frustration."
+    },
+    scenario2: {
+        title: "Common Space Scheduling Conflict",
+        description: "Two members seek to use the community room concurrently for distinct events. One member made an informal reservation weeks prior but failed to complete the official booking procedure. The other member submitted the proper reservation form yesterday."
+    },
+    scenario3: {
+        title: "Noise Disturbance Discussion",
+        description: "A member addresses a neighbor regarding excessive noise from late-night gatherings. This marks the third such discussion within two months, with previous agreements to mitigate noise having been disregarded."
+    }
+};
+
+const POLICY_TYPES = {
+    conflict: {
+        title: "Conflict Resolution Policy",
+        questions: `
+            <h3 class="text-xl font-semibold mb-3">Conflict Resolution Process</h3>
+            <div class="mb-4">
+                <label class="block mb-2">What is the preferred process for resolving conflicts?</label>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="process-mediation" name="conflict-process" value="Mediation by a neutral third party." class="mr-2">
+                    <label for="process-mediation">Mediation by a neutral third party</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="process-board" name="conflict-process" value="Direct resolution facilitated by the cooperative board." class="mr-2">
+                    <label for="process-board">Direct resolution facilitated by the cooperative board</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="process-member" name="conflict-process" value="Member-to-member discussion with optional board oversight." class="mr-2">
+                    <label for="process-member">Member-to-member discussion with optional board oversight</label>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Mediator Selection</h3>
+            <div class="mb-4">
+                <label class="block mb-2">Who can serve as mediators?</label>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="mediator-internal" name="conflict-mediators" value="Trained internal cooperative members." class="mr-2">
+                    <label for="mediator-internal">Trained internal cooperative members</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="mediator-external" name="conflict-mediators" value="External professional mediators." class="mr-2">
+                    <label for="mediator-external">External professional mediators</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="mediator-board" name="conflict-mediators" value="Designated board members." class="mr-2">
+                    <label for="mediator-board">Designated board members</label>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Resolution Timeline</h3>
+            <div class="mb-4">
+                <label class="block mb-2" for="conflict-timeline">What is the expected timeline for conflict resolution (e.g., 30 days)?</label>
+                <input type="text" id="conflict-timeline" class="w-full p-2 border border-gray-300 rounded" placeholder="e.g., 30 days">
+            </div>
+        `
+    },
+    communication: {
+        title: "Communication Policy",
+        questions: `
+            <h3 class="text-xl font-semibold mb-3">Communication Channels</h3>
+            <div class="mb-4">
+                <label class="block mb-2">Which communication channels will be primarily utilized?</label>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="channel-email" name="comm-channels" value="Email (official announcements, newsletters)." class="mr-2">
+                    <label for="channel-email">Email (official announcements, newsletters)</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="channel-board" name="comm-channels" value="Physical notice board (for general information)." class="mr-2">
+                    <label for="channel-board">Physical notice board (for general information)</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="channel-online" name="comm-channels" value="Online forum/messaging platform (for member discussions)." class="mr-2">
+                    <label for="channel-online">Online forum/messaging platform (for member discussions)</label>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Communication Frequency</h3>
+            <div class="mb-4">
+                <label class="block mb-2">What is the desired frequency of official communications?</label>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="frequency-weekly" name="comm-frequency" value="Weekly." class="mr-2">
+                    <label for="frequency-weekly">Weekly</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="frequency-biweekly" name="comm-frequency" value="Bi-weekly." class="mr-2">
+                    <label for="frequency-biweekly">Bi-weekly</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="frequency-monthly" name="comm-frequency" value="Monthly." class="mr-2">
+                    <label for="frequency-monthly">Monthly</label>
+                </div>
+            </div>
+        `
+    },
+    participation: {
+        title: "Member Participation Policy",
+        questions: `
+            <h3 class="text-xl font-semibold mb-3">Participation Expectations</h3>
+            <div class="mb-4">
+                <label class="block mb-2">What are the expectations for member participation?</label>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="participation-mandatory" name="participation-level" value="Mandatory attendance at general meetings and committees." class="mr-2">
+                    <label for="participation-mandatory">Mandatory attendance at general meetings and committees</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="participation-encouraged" name="participation-level" value="Encouraged participation in cooperative activities and decision-making." class="mr-2">
+                    <label for="participation-encouraged">Encouraged participation in cooperative activities and decision-making</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="participation-voluntary" name="participation-level" value="Voluntary engagement in cooperative initiatives." class="mr-2">
+                    <label for="participation-voluntary">Voluntary engagement in cooperative initiatives</label>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Contribution Areas</h3>
+            <div class="mb-4">
+                <label class="block mb-2">In which areas are member contributions particularly valued?</label>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="contribution-governance" name="contribution-areas" value="Governance and policy development." class="mr-2">
+                    <label for="contribution-governance">Governance and policy development</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="contribution-maintenance" name="contribution-areas" value="Maintenance and upkeep of common areas." class="mr-2">
+                    <label for="contribution-maintenance">Maintenance and upkeep of common areas</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="contribution-social" name="contribution-areas" value="Organizing social events and community building activities." class="mr-2">
+                    <label for="contribution-social">Organizing social events and community building activities</label>
+                </div>
+            </div>
+        `
+    },
+    'common-space': {
+        title: "Common Space Usage Policy",
+        questions: `
+            <h3 class="text-xl font-semibold mb-3">Booking Procedure</h3>
+            <div class="mb-4">
+                <label class="block mb-2">What is the procedure for booking common spaces?</label>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="booking-online" name="booking-procedure" value="Online booking system with calendar." class="mr-2">
+                    <label for="booking-online">Online booking system with calendar</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="booking-physical" name="booking-procedure" value="Physical sign-up sheet at the common space." class="mr-2">
+                    <label for="booking-physical">Physical sign-up sheet at the common space</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="booking-contact" name="booking-procedure" value="Contacting a designated board member or committee." class="mr-2">
+                    <label for="booking-contact">Contacting a designated board member or committee</label>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Usage Guidelines</h3>
+            <div class="mb-4">
+                <label class="block mb-2">What are the key guidelines for using common spaces?</label>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="guideline-cleanliness" name="usage-guidelines" value="Users are responsible for cleaning the space after use." class="mr-2">
+                    <label for="guideline-cleanliness">Users are responsible for cleaning the space after use</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="checkbox" id="guideline-noise" name="usage-guidelines" value="Noise levels must be kept to a minimum during specified hours." class="mr-2">
+                    <label for="guideline-noise">Noise levels must be kept to a minimum during specified hours</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="guideline-damage" name="usage-guidelines" value="Any damage to the space or its contents must be reported immediately." class="mr-2">
+                    <label for="guideline-damage">Any damage to the space or its contents must be reported immediately</label>
+                </div>
+            </div>
+        `
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all interactive components
     initConflictFlowchart();
@@ -15,64 +249,6 @@ function initConflictFlowchart() {
     
     if (!flowchartContainer) return;
     
-    // Define the flowchart steps
-    const steps = [
-        {
-            id: 'step1',
-            title: 'Acknowledge Conflict',
-            description: 'Recognize that a conflict exists and requires attention.',
-            details: 'Effective conflict resolution begins with acknowledging the presence of a dispute. This involves recognizing indicators such as increased tension, avoidance behaviors, or direct complaints. Approach the situation with an objective and curious mindset, rather than a judgmental one. Understand that conflict is an inherent aspect of communal living and, when managed effectively, can foster positive growth and strengthen cooperative bonds.',
-            x: 100,
-            y: 50,
-            next: ['step2']
-        },
-        {
-            id: 'step2',
-            title: 'Gather Information',
-            description: 'Collect comprehensive facts and diverse perspectives from all involved parties.',
-            details: 'Before attempting resolution, it is crucial to acquire a complete understanding of the situation. Conduct separate discussions with each party to ascertain their individual perspectives. Employ open-ended questions, such as "What transpired?" and "How did this affect you?" Document pertinent details objectively, refraining from assigning blame. Seek verifiable information to clarify the circumstances.',
-            x: 100,
-            y: 150,
-            next: ['step3']
-        },
-        {
-            id: 'step3',
-            title: 'Identify Core Interests',
-            description: 'Move beyond stated positions to understand underlying needs and motivations.',
-            details: 'Distinguish between \'positions\' (what individuals explicitly state they desire) and \'interests\' (the fundamental reasons behind those desires). For instance, a position might be "I require extended quiet hours," whereas the underlying interest is "I need uninterrupted rest." Identifying these core interests often reveals multiple viable solutions that can satisfy the essential needs of all parties. Ask "Why is this significant to you?" to uncover these deeper motivations.',
-            x: 100,
-            y: 250,
-            next: ['step4']
-        },
-        {
-            id: 'step4',
-            title: 'Generate Solutions',
-            description: 'Brainstorm a range of options that address the identified core interests.',
-            details: 'Foster a collaborative environment where all participants contribute ideas freely. During this phase, prioritize the generation of numerous potential solutions without immediate evaluation or criticism. Encourage innovative thinking and the development of ideas based on previous suggestions. Consider successful approaches from similar past situations. The objective is to maximize the quantity of ideas before assessing their quality.',
-            x: 300,
-            y: 250,
-            next: ['step5']
-        },
-        {
-            id: 'step5',
-            title: 'Evaluate & Select Solutions',
-            description: 'Choose the most effective options that align with shared needs and cooperative values.',
-            details: 'Assess each proposed solution against objective criteria, including fairness, practicality, and adherence to cooperative principles. Consider both immediate and long-term implications. Prioritize solutions that address the most critical interests of all stakeholders. Formalize the agreed-upon solution with precise details regarding its implementation.',
-            x: 300,
-            y: 150,
-            next: ['step6']
-        },
-        {
-            id: 'step6',
-            title: 'Implement & Follow Up',
-            description: 'Execute the chosen solutions and monitor their effectiveness.',
-            details: 'Develop a clear implementation plan that includes specific actions, assigned responsibilities, and defined timelines. Schedule regular check-ins to evaluate the efficacy of the solution and make necessary adjustments. Acknowledge and celebrate successful resolutions, recognizing the contributions of all participants. Document lessons learned to inform future conflict resolution processes.',
-            x: 300,
-            y: 50,
-            next: []
-        }
-    ];
-    
     // Clear loading message
     flowchartContainer.innerHTML = '';
     
@@ -83,15 +259,20 @@ function initConflictFlowchart() {
         .attr('height', '100%')
         .attr('viewBox', '0 0 500 300');
     
+    // Create a Map for O(1) step lookup
+    const stepsMap = new Map(FLOWCHART_STEPS.map(step => [step.id, step]));
+
     // Draw connections between steps
     const connections = [];
-    steps.forEach(step => {
+    FLOWCHART_STEPS.forEach(step => {
         step.next.forEach(nextId => {
-            const nextStep = steps.find(s => s.id === nextId);
-            connections.push({
-                source: step,
-                target: nextStep
-            });
+            const nextStep = stepsMap.get(nextId);
+            if (nextStep) {
+                connections.push({
+                    source: step,
+                    target: nextStep
+                });
+            }
         });
     });
     
@@ -122,7 +303,7 @@ function initConflictFlowchart() {
     
     // Draw step boxes
     const stepGroups = svg.selectAll('g')
-        .data(steps)
+        .data(FLOWCHART_STEPS)
         .enter()
         .append('g')
         .attr('transform', d => `translate(${d.x}, ${d.y})`)
@@ -165,10 +346,10 @@ function initConflictFlowchart() {
     
     // Initialize with the first step selected
     stepDetails.innerHTML = `
-        <h4 class="font-semibold text-lg mb-2">${steps[0].title}</h4>
-        <p class="mb-3">${steps[0].description}</p>
+        <h4 class="font-semibold text-lg mb-2">${FLOWCHART_STEPS[0].title}</h4>
+        <p class="mb-3">${FLOWCHART_STEPS[0].description}</p>
         <div class="bg-white p-3 rounded border border-blue-200">
-            <p>${steps[0].details}</p>
+            <p>${FLOWCHART_STEPS[0].details}</p>
         </div>
     `;
     
@@ -188,25 +369,9 @@ function initCommunicationSimulator() {
     
     if (!scenarioSelector || !simulateButton) return;
     
-    // Define scenarios
-    const scenarios = {
-        scenario1: {
-            title: "Maintenance Request Resolution",
-            description: "A member has repeatedly submitted maintenance requests for a persistent faucet leak, yet repairs remain incomplete. They confront the maintenance coordinator at a community event, expressing significant frustration."
-        },
-        scenario2: {
-            title: "Common Space Scheduling Conflict",
-            description: "Two members seek to use the community room concurrently for distinct events. One member made an informal reservation weeks prior but failed to complete the official booking procedure. The other member submitted the proper reservation form yesterday."
-        },
-        scenario3: {
-            title: "Noise Disturbance Discussion",
-            description: "A member addresses a neighbor regarding excessive noise from late-night gatherings. This marks the third such discussion within two months, with previous agreements to mitigate noise having been disregarded."
-        }
-    };
-    
     // Update scenario description when selection changes
     scenarioSelector.addEventListener('change', function() {
-        const selectedScenario = scenarios[this.value];
+        const selectedScenario = COMMUNICATION_SCENARIOS[this.value];
         if (selectedScenario) {
             scenarioDescription.innerHTML = `
                 <h4 class="font-semibold mb-2">${selectedScenario.title}</h4>
@@ -218,8 +383,8 @@ function initCommunicationSimulator() {
     // Initialize with the first scenario
     scenarioSelector.value = 'scenario1';
     scenarioDescription.innerHTML = `
-        <h4 class="font-semibold mb-2">${scenarios.scenario1.title}</h4>
-        <p>${scenarios.scenario1.description}</p>
+        <h4 class="font-semibold mb-2">${COMMUNICATION_SCENARIOS.scenario1.title}</h4>
+        <p>${COMMUNICATION_SCENARIOS.scenario1.description}</p>
     `;
     
     // Simulate conversation when button is clicked
@@ -371,167 +536,6 @@ function initPolicyWizard() {
 
     if (!policyTypeSelector) return;
 
-    const policyTypes = {
-        conflict: {
-            title: "Conflict Resolution Policy",
-            questions: `
-                <h3 class="text-xl font-semibold mb-3">Conflict Resolution Process</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">What is the preferred process for resolving conflicts?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="process-mediation" name="conflict-process" value="Mediation by a neutral third party." class="mr-2">
-                        <label for="process-mediation">Mediation by a neutral third party</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="process-board" name="conflict-process" value="Direct resolution facilitated by the cooperative board." class="mr-2">
-                        <label for="process-board">Direct resolution facilitated by the cooperative board</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="process-member" name="conflict-process" value="Member-to-member discussion with optional board oversight." class="mr-2">
-                        <label for="process-member">Member-to-member discussion with optional board oversight</label>
-                    </div>
-                </div>
-                
-                <h3 class="text-xl font-semibold mb-3">Mediator Selection</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">Who can serve as mediators?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="mediator-internal" name="conflict-mediators" value="Trained internal cooperative members." class="mr-2">
-                        <label for="mediator-internal">Trained internal cooperative members</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="mediator-external" name="conflict-mediators" value="External professional mediators." class="mr-2">
-                        <label for="mediator-external">External professional mediators</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="mediator-board" name="conflict-mediators" value="Designated board members." class="mr-2">
-                        <label for="mediator-board">Designated board members</label>
-                    </div>
-                </div>
-                
-                <h3 class="text-xl font-semibold mb-3">Resolution Timeline</h3>
-                <div class="mb-4">
-                    <label class="block mb-2" for="conflict-timeline">What is the expected timeline for conflict resolution (e.g., 30 days)?</label>
-                    <input type="text" id="conflict-timeline" class="w-full p-2 border border-gray-300 rounded" placeholder="e.g., 30 days">
-                </div>
-            `
-        },
-        communication: {
-            title: "Communication Policy",
-            questions: `
-                <h3 class="text-xl font-semibold mb-3">Communication Channels</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">Which communication channels will be primarily utilized?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="channel-email" name="comm-channels" value="Email (official announcements, newsletters)." class="mr-2">
-                        <label for="channel-email">Email (official announcements, newsletters)</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="channel-board" name="comm-channels" value="Physical notice board (for general information)." class="mr-2">
-                        <label for="channel-board">Physical notice board (for general information)</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="channel-online" name="comm-channels" value="Online forum/messaging platform (for member discussions)." class="mr-2">
-                        <label for="channel-online">Online forum/messaging platform (for member discussions)</label>
-                    </div>
-                </div>
-                
-                <h3 class="text-xl font-semibold mb-3">Communication Frequency</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">What is the desired frequency of official communications?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="frequency-weekly" name="comm-frequency" value="Weekly." class="mr-2">
-                        <label for="frequency-weekly">Weekly</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="frequency-biweekly" name="comm-frequency" value="Bi-weekly." class="mr-2">
-                        <label for="frequency-biweekly">Bi-weekly</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="frequency-monthly" name="comm-frequency" value="Monthly." class="mr-2">
-                        <label for="frequency-monthly">Monthly</label>
-                    </div>
-                </div>
-            `
-        },
-        participation: {
-            title: "Member Participation Policy",
-            questions: `
-                <h3 class="text-xl font-semibold mb-3">Participation Expectations</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">What are the expectations for member participation?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="participation-mandatory" name="participation-level" value="Mandatory attendance at general meetings and committees." class="mr-2">
-                        <label for="participation-mandatory">Mandatory attendance at general meetings and committees</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="participation-encouraged" name="participation-level" value="Encouraged participation in cooperative activities and decision-making." class="mr-2">
-                        <label for="participation-encouraged">Encouraged participation in cooperative activities and decision-making</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="participation-voluntary" name="participation-level" value="Voluntary engagement in cooperative initiatives." class="mr-2">
-                        <label for="participation-voluntary">Voluntary engagement in cooperative initiatives</label>
-                    </div>
-                </div>
-                
-                <h3 class="text-xl font-semibold mb-3">Contribution Areas</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">In which areas are member contributions particularly valued?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="contribution-governance" name="contribution-areas" value="Governance and policy development." class="mr-2">
-                        <label for="contribution-governance">Governance and policy development</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="contribution-maintenance" name="contribution-areas" value="Maintenance and upkeep of common areas." class="mr-2">
-                        <label for="contribution-maintenance">Maintenance and upkeep of common areas</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="contribution-social" name="contribution-areas" value="Organizing social events and community building activities." class="mr-2">
-                        <label for="contribution-social">Organizing social events and community building activities</label>
-                    </div>
-                </div>
-            `
-        },
-        'common-space': {
-            title: "Common Space Usage Policy",
-            questions: `
-                <h3 class="text-xl font-semibold mb-3">Booking Procedure</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">What is the procedure for booking common spaces?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="booking-online" name="booking-procedure" value="Online booking system with calendar." class="mr-2">
-                        <label for="booking-online">Online booking system with calendar</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="radio" id="booking-physical" name="booking-procedure" value="Physical sign-up sheet at the common space." class="mr-2">
-                        <label for="booking-physical">Physical sign-up sheet at the common space</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="booking-contact" name="booking-procedure" value="Contacting a designated board member or committee." class="mr-2">
-                        <label for="booking-contact">Contacting a designated board member or committee</label>
-                    </div>
-                </div>
-                
-                <h3 class="text-xl font-semibold mb-3">Usage Guidelines</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">What are the key guidelines for using common spaces?</label>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="guideline-cleanliness" name="usage-guidelines" value="Users are responsible for cleaning the space after use." class="mr-2">
-                        <label for="guideline-cleanliness">Users are responsible for cleaning the space after use</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input type="checkbox" id="guideline-noise" name="usage-guidelines" value="Noise levels must be kept to a minimum during specified hours." class="mr-2">
-                        <label for="guideline-noise">Noise levels must be kept to a minimum during specified hours</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="guideline-damage" name="usage-guidelines" value="Any damage to the space or its contents must be reported immediately." class="mr-2">
-                        <label for="guideline-damage">Any damage to the space or its contents must be reported immediately</label>
-                    </div>
-                </div>
-            `
-        }
-    };
-
     // Add a button to generate the policy, initially hidden
     const generateButton = document.createElement('button');
     generateButton.id = 'generate-policy';
@@ -541,8 +545,8 @@ function initPolicyWizard() {
 
     policyTypeSelector.addEventListener('change', function() {
         const selectedType = this.value;
-        if (selectedType && policyTypes[selectedType]) {
-            policyQuestions.innerHTML = policyTypes[selectedType].questions;
+        if (selectedType && POLICY_TYPES[selectedType]) {
+            policyQuestions.innerHTML = POLICY_TYPES[selectedType].questions;
             policyQuestions.classList.remove('hidden');
             generateButton.classList.remove('hidden');
             policyPreview.classList.add('hidden'); // Hide preview when questions change
@@ -560,7 +564,7 @@ function initPolicyWizard() {
 
     // Generate policy based on form inputs
     function generatePolicy(policyType) {
-        const selectedPolicy = policyTypes[policyType];
+        const selectedPolicy = POLICY_TYPES[policyType];
         if (!selectedPolicy) return;
         
         const purposeDescriptions = {
@@ -703,5 +707,3 @@ function initPolicyWizard() {
         document.body.removeChild(element);
     });
 }
-
-

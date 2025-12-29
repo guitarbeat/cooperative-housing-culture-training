@@ -7,7 +7,10 @@ const PORT = 8080;
 const ROOT = '.'; // Serve files from the current directory
 
 const server = http.createServer((req, res) => {
-    const filePath = path.join(ROOT, req.url === '/' ? 'policy-wizard-test-runner.html' : req.url);
+    // Basic path sanitization to prevent directory traversal
+    const safeUrl = path.normalize(req.url).replace(/^(\.\.[\/\\])+/, '');
+    const filePath = path.join(ROOT, safeUrl === '/' ? 'policy-wizard-test-runner.html' : safeUrl);
+
     const extname = String(path.extname(filePath)).toLowerCase();
     const mimeTypes = {
         '.html': 'text/html',
@@ -20,9 +23,11 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code === 'ENOENT') {
+                console.log(`404 Not Found: ${filePath}`);
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
                 res.end('404 Not Found');
             } else {
+                console.log(`500 Error: ${error.code} for ${filePath}`);
                 res.writeHead(500);
                 res.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
             }
@@ -46,7 +51,16 @@ async function runTests() {
 
     try {
         await page.goto(`http://localhost:${PORT}/policy-wizard-test-runner.html`);
-        await page.waitForSelector('#qunit-test-output', { timeout: 10000 });
+        // Wait for QUnit to finish.
+        // QUnit adds 'qunit-pass' or 'qunit-fail' class to #qunit-banner when done.
+        // We wait for #qunit-banner to have either class.
+        await page.waitForFunction(
+            () => {
+                const banner = document.querySelector('#qunit-banner');
+                return banner && (banner.className.includes('qunit-pass') || banner.className.includes('qunit-fail'));
+            },
+            { timeout: 10000 }
+        );
 
         const testResult = await page.evaluate(() => {
             const banner = document.querySelector('#qunit-banner');
@@ -57,13 +71,14 @@ async function runTests() {
             };
             const tests = document.querySelectorAll('#qunit-tests > li');
             tests.forEach(test => {
-                result.details.push(test.innerText);
+                const message = test.querySelector('.test-message')?.innerText || test.innerText.split('\n')[0];
+                result.details.push(message);
             });
             return result;
         });
 
         console.log('--- QUnit Test Results ---');
-        console.log(testResult.text);
+        console.log(`Status: ${testResult.passed ? 'PASSED' : 'FAILED'}`);
         console.log('--------------------------');
         testResult.details.forEach(detail => console.log(detail));
         console.log('--------------------------');
