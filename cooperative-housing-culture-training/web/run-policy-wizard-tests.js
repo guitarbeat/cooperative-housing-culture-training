@@ -7,7 +7,17 @@ const PORT = 8080;
 const ROOT = '.'; // Serve files from the current directory
 
 const server = http.createServer((req, res) => {
-    const filePath = path.join(ROOT, req.url === '/' ? 'policy-wizard-test-runner.html' : req.url);
+    // Basic fix for the test runner requesting /
+    let reqUrl = req.url;
+    if (reqUrl === '/') {
+        reqUrl = '/policy-wizard-test-runner.html';
+    }
+
+    // Remove query string if any
+    const filePath = path.join(ROOT, reqUrl.split('?')[0]);
+
+    console.log(`[SERVER] Request: ${req.url} -> File: ${filePath}`);
+
     const extname = String(path.extname(filePath)).toLowerCase();
     const mimeTypes = {
         '.html': 'text/html',
@@ -19,6 +29,7 @@ const server = http.createServer((req, res) => {
 
     fs.readFile(filePath, (error, content) => {
         if (error) {
+            console.log(`[SERVER] Error loading ${filePath}: ${error.code}`);
             if (error.code === 'ENOENT') {
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
                 res.end('404 Not Found');
@@ -43,6 +54,9 @@ async function runTests() {
     const page = await browser.newPage();
 
     page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+    page.on('requestfailed', request => {
+      console.log(`PAGE REQUEST FAILED: ${request.url()} - ${request.failure().errorText}`);
+    });
 
     try {
         await page.goto(`http://localhost:${PORT}/policy-wizard-test-runner.html`);

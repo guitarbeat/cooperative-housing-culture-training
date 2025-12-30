@@ -1,20 +1,7 @@
 // Cooperative Housing Culture & Conflict Resolution Training
 // Interactive Components JavaScript
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all interactive components
-    initConflictFlowchart();
-    initCommunicationSimulator();
-    initPolicyWizard();
-});
-
-// ===== Conflict Resolution Flowchart =====
-function initConflictFlowchart() {
-    const flowchartContainer = document.querySelector('.flowchart-container');
-    const stepDetails = document.getElementById('step-details');
-    
-    if (!flowchartContainer) return;
-    
+(function() {
     // Define the flowchart steps
     const steps = [
         {
@@ -72,122 +59,7 @@ function initConflictFlowchart() {
             next: []
         }
     ];
-    
-    // Clear loading message
-    flowchartContainer.innerHTML = '';
-    
-    // Create SVG element for the flowchart
-    const svg = d3.select('.flowchart-container')
-        .append('svg')
-        .attr('width', '100%')
-        .attr('height', '100%')
-        .attr('viewBox', '0 0 500 300');
-    
-    // Draw connections between steps
-    const connections = [];
-    steps.forEach(step => {
-        step.next.forEach(nextId => {
-            const nextStep = steps.find(s => s.id === nextId);
-            connections.push({
-                source: step,
-                target: nextStep
-            });
-        });
-    });
-    
-    svg.selectAll('path')
-        .data(connections)
-        .enter()
-        .append('path')
-        .attr('d', d => {
-            return `M${d.source.x + 75},${d.source.y + 25} L${d.target.x},${d.target.y + 25}`;
-        })
-        .attr('stroke', '#4299E1')
-        .attr('stroke-width', 2)
-        .attr('fill', 'none')
-        .attr('marker-end', 'url(#arrow)');
-    
-    // Add arrow marker for the connections
-    svg.append('defs').append('marker')
-        .attr('id', 'arrow')
-        .attr('viewBox', '0 -5 10 10')
-        .attr('refX', 8)
-        .attr('refY', 0)
-        .attr('markerWidth', 6)
-        .attr('markerHeight', 6)
-        .attr('orient', 'auto')
-        .append('path')
-        .attr('d', 'M0,-5L10,0L0,5')
-        .attr('fill', '#4299E1');
-    
-    // Draw step boxes
-    const stepGroups = svg.selectAll('g')
-        .data(steps)
-        .enter()
-        .append('g')
-        .attr('transform', d => `translate(${d.x}, ${d.y})`)
-        .attr('class', 'step')
-        .style('cursor', 'pointer')
-        .on('click', function(event, d) {
-            // Update step details when clicked
-            stepDetails.innerHTML = `
-                <h4 class="font-semibold text-lg mb-2">${d.title}</h4>
-                <p class="mb-3">${d.description}</p>
-                <div class="bg-white p-3 rounded border border-blue-200">
-                    <p>${d.details}</p>
-                </div>
-            `;
-            
-            // Highlight the selected step
-            svg.selectAll('rect').attr('fill', '#EBF8FF');
-            d3.select(this).select('rect').attr('fill', '#BEE3F8');
-        });
-    
-    // Add rectangles for each step
-    stepGroups.append('rect')
-        .attr('width', 150)
-        .attr('height', 50)
-        .attr('rx', 5)
-        .attr('ry', 5)
-        .attr('fill', '#EBF8FF')
-        .attr('stroke', '#4299E1')
-        .attr('stroke-width', 1);
-    
-    // Add text labels for each step
-    stepGroups.append('text')
-        .attr('x', 75)
-        .attr('y', 30)
-        .attr('text-anchor', 'middle')
-        .attr('fill', '#2C5282')
-        .style('font-size', '12px')
-        .style('font-weight', '600')
-        .text(d => d.title);
-    
-    // Initialize with the first step selected
-    stepDetails.innerHTML = `
-        <h4 class="font-semibold text-lg mb-2">${steps[0].title}</h4>
-        <p class="mb-3">${steps[0].description}</p>
-        <div class="bg-white p-3 rounded border border-blue-200">
-            <p>${steps[0].details}</p>
-        </div>
-    `;
-    
-    // Highlight the first step
-    svg.select('.step rect').attr('fill', '#BEE3F8');
-}
 
-// ===== Communication Style Simulator =====
-function initCommunicationSimulator() {
-    const scenarioSelector = document.getElementById('scenario-selector');
-    const scenarioDescription = document.getElementById('scenario-description');
-    const assertivenessSlider = document.getElementById('assertiveness-slider');
-    const cooperativenessSlider = document.getElementById('cooperativeness-slider');
-    const simulateButton = document.getElementById('simulate-button');
-    const simulationResults = document.getElementById('simulation-results');
-    const communicationStyle = document.getElementById('communication-style');
-    
-    if (!scenarioSelector || !simulateButton) return;
-    
     // Define scenarios
     const scenarios = {
         scenario1: {
@@ -203,174 +75,8 @@ function initCommunicationSimulator() {
             description: "A member addresses a neighbor regarding excessive noise from late-night gatherings. This marks the third such discussion within two months, with previous agreements to mitigate noise having been disregarded."
         }
     };
-    
-    // Update scenario description when selection changes
-    scenarioSelector.addEventListener('change', function() {
-        const selectedScenario = scenarios[this.value];
-        if (selectedScenario) {
-            scenarioDescription.innerHTML = `
-                <h4 class="font-semibold mb-2">${selectedScenario.title}</h4>
-                <p>${selectedScenario.description}</p>
-            `;
-        }
-    });
-    
-    // Initialize with the first scenario
-    scenarioSelector.value = 'scenario1';
-    scenarioDescription.innerHTML = `
-        <h4 class="font-semibold mb-2">${scenarios.scenario1.title}</h4>
-        <p>${scenarios.scenario1.description}</p>
-    `;
-    
-    // Simulate conversation when button is clicked
-    simulateButton.addEventListener('click', function() {
-        const assertiveness = parseInt(assertivenessSlider.value);
-        const cooperativeness = parseInt(cooperativenessSlider.value);
-        const scenarioKey = scenarioSelector.value;
-        
-        // Determine communication style based on sliders
-        let style = '';
-        if (assertiveness >= 7 && cooperativeness <= 3) {
-            style = 'Competing';
-        } else if (assertiveness <= 3 && cooperativeness >= 7) {
-            style = 'Accommodating';
-        } else if (assertiveness <= 3 && cooperativeness <= 3) {
-            style = 'Avoiding';
-        } else if (assertiveness >= 4 && assertiveness <= 6 && cooperativeness >= 4 && cooperativeness <= 6) {
-            style = 'Compromising';
-        } else if (assertiveness >= 7 && cooperativeness >= 7) {
-            style = 'Collaborating';
-        } else {
-            style = 'Mixed';
-        }
-        
-        // Generate simulation results based on scenario and communication style
-        let results = '';
-        
-        if (scenarioKey === 'scenario1') {
-            if (style === 'Competing') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "This is unacceptable. I have submitted three requests, and the issue remains unresolved. I expect immediate action, or I will escalate this to the board."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I understand your frustration, but adherence to established procedures is necessary. Your aggressive tone is counterproductive."</p>
-                    <p class="mb-2"><strong>You:</strong> "My priority is a functional faucet, not bureaucratic processes. This must be addressed immediately."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The maintenance coordinator becomes defensive, and the professional relationship is strained. While the repair may be expedited, it comes at the cost of goodwill and future cooperation.</p>
-                `;
-            } else if (style === 'Accommodating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I apologize for reiterating this, but my faucet continues to leak. I understand you are busy."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Yes, I recall. Several urgent repairs currently take precedence."</p>
-                    <p class="mb-2"><strong>You:</strong> "Understood. I am prepared to wait as necessary."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The relationship remains amicable, but your needs are not met. The repair remains a low priority, potentially delaying resolution for an extended period.</p>
-                `;
-            } else if (style === 'Avoiding') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> *Observes the maintenance coordinator but elects not to address the issue.*</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Hello! Are you enjoying the community event?"</p>
-                    <p class="mb-2"><strong>You:</strong> "Yes, it's pleasant. I should attend to something else now..."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> Direct conflict is averted, but the underlying problem persists. Your frustration escalates, potentially diminishing your satisfaction with the cooperative environment.</p>
-                `;
-            } else if (style === 'Compromising') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I am following up on my faucet repair. It has been a month since my initial request."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I acknowledge the delay. We have prioritized several emergency repairs."</p>
-                    <p class="mb-2"><strong>You:</strong> "I understand emergencies take precedence. Can we establish a definitive date for my repair to manage expectations?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> An agreement is reached for the repair to be completed within the next week. While not immediate, a clear timeline mitigates your frustration.</p>
-                `;
-            } else if (style === 'Collaborating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I wish to discuss my faucet repair. My concern is the ongoing water waste and potential structural damage."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I appreciate you raising this. We are currently managing a high volume of requests. Could you elaborate on the issue?"</p>
-                    <p class="mb-2"><strong>You:</strong> "The leak is worsening, and I am concerned about mold development. I possess basic plumbing knowledge; would my assistance expedite the repair process?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> A mutually beneficial plan is developed, addressing both your need for a timely repair and the coordinator's resource constraints. The coordinator agrees to prioritize your repair and provide materials if you can assist.</p>
-                `;
-            }
-        } else if (scenarioKey === 'scenario2') {
-            if (style === 'Competing') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I verbally reserved this room weeks ago. The formal process is merely a bureaucratic formality."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "I adhered to the established procedure and submitted the required form. The regulations clearly define the reservation protocol."</p>
-                    <p class="mb-2"><strong>You:</strong> "My event is of greater importance, and I announced it first. I will not alter my plans."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The conflict escalates, potentially necessitating intervention by the board. Community cohesion is compromised, and neither party perceives their concerns as respected.</p>
-                `;
-            } else if (style === 'Accommodating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I understand I did not complete the official form. You may proceed with your event."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "Thank you for your understanding. I appreciate your flexibility."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You concede the room, maintaining a harmonious relationship but sacrificing your event. This may lead to future resentment if your needs are consistently deprioritized.</p>
-                `;
-            } else if (style === 'Avoiding') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> *Notices the other member setting up in the community room but avoids confrontation.*</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "(To a third party) Glad I got the form in on time!"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The conflict is unaddressed, and the other member uses the room. Your event is cancelled, and you may feel unheard or undervalued within the cooperative.</p>
-                `;
-            } else if (style === 'Compromising') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "It appears we have a scheduling overlap. I informally reserved the room, but I acknowledge you completed the official process."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "Yes, I followed the procedure. Is there a way we can both use the space, perhaps at different times?"</p>
-                    <p class="mb-2"><strong>You:</strong> "Perhaps we could split the time, or I could use it for a shorter duration if you need the majority of the time."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You agree to share the room or adjust your schedules, allowing both events to proceed, albeit with some modifications. This demonstrates flexibility and a willingness to find common ground.</p>
-                `;
-            } else if (style === 'Collaborating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "We have a conflict regarding the community room. My objective is to host my event, and I understand you also have a need for the space."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "Indeed. I followed the formal process, but I am open to finding a solution that works for both of us."</p>
-                    <p class="mb-2"><strong>You:</strong> "Could we explore alternative spaces, or perhaps adjust the timing of our events to allow both to occur without conflict? My event could be shorter if necessary."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> Through open dialogue, you identify a creative solution, such as using an alternative space, rescheduling one event, or co-hosting. Both parties achieve their objectives, and the cooperative benefits from a strengthened problem-solving culture.</p>
-                `;
-            }
-        } else if (scenarioKey === 'scenario3') {
-            if (style === 'Competing') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "Your late-night noise is disruptive and unacceptable. This is the third time I've addressed this, and it needs to stop immediately."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "I'm entitled to host guests. You're being overly sensitive."</p>
-                    <p class="mb-2"><strong>You:</strong> "I will report this to the board if it continues. Your actions violate community guidelines."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The interaction escalates into an adversarial exchange, potentially leading to formal complaints and further deterioration of neighborly relations.</p>
-                `;
-            } else if (style === 'Accommodating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I apologize for mentioning this again, but the noise has been quite loud recently. I understand you enjoy entertaining."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "Yes, we do. We try to be mindful, but sometimes it gets late."</p>
-                    <p class="mb-2"><strong>You:</strong> "That's perfectly fine. I just wanted to bring it to your attention."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You prioritize maintaining a pleasant relationship, but the noise issue remains unresolved. Your discomfort persists, and the neighbor may not perceive the issue as significant.</p>
-                `;
-            } else if (style === 'Avoiding') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> *Hears loud noise from the neighbor's unit but decides not to engage, instead using earplugs.*</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The noise continues, and your discomfort is unaddressed. You may feel increasingly resentful and isolated, avoiding interaction with the neighbor.</p>
-                `;
-            } else if (style === 'Compromising') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I need to discuss the noise levels. While I appreciate your right to entertain, the late-night volume is impacting my ability to rest."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "I understand. We enjoy hosting, but I recognize the need for quiet hours."</p>
-                    <p class="mb-2"><strong>You:</strong> "Could we agree on a specific time, say 11 PM, after which noise levels are significantly reduced?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You reach a compromise where the neighbor agrees to reduce noise after a certain hour. While not ideal for either party, it provides a workable solution that respects both needs.</p>
-                `;
-            } else if (style === 'Collaborating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I want to find a solution regarding the late-night noise. My concern is the impact on my sleep, and I value our cooperative living environment."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "I understand your concern. We enjoy socializing, and I want to ensure we are good neighbors."</p>
-                    <p class="mb-2"><strong>You:</strong> "Could we explore options such as improving sound insulation, shifting social gatherings to earlier times, or utilizing common spaces for louder activities? I am open to suggestions."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> Through collaborative discussion, you identify mutually beneficial strategies, such as adjusting gathering times, utilizing sound-dampening solutions, or designating specific areas for louder activities. This strengthens the neighborly relationship and fosters a more harmonious living environment.</p>
-                `;
-            }
-        }
-        
-        simulationResults.innerHTML = results;
-        communicationStyle.innerHTML = `<p><strong>Style:</strong> ${style}</p>`;
-    });
-}
 
-// ===== Policy Development Wizard =====
-function initPolicyWizard() {
-    const policyTypeSelector = document.getElementById('policy-type-selector');
-    const policyQuestions = document.getElementById('policy-questions');
-    const policyPreview = document.getElementById('policy-preview');
-    const policyContent = document.getElementById('policy-content');
-    const downloadPolicy = document.getElementById('download-policy');
-
-    if (!policyTypeSelector) return;
-
+    // Define policy types
     const policyTypes = {
         conflict: {
             title: "Conflict Resolution Policy",
@@ -532,176 +238,476 @@ function initPolicyWizard() {
         }
     };
 
-    // Add a button to generate the policy, initially hidden
-    const generateButton = document.createElement('button');
-    generateButton.id = 'generate-policy';
-    generateButton.className = 'bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4 hidden';
-    generateButton.textContent = 'Generate Policy';
-    policyQuestions.parentNode.insertBefore(generateButton, policyQuestions.nextSibling);
-
-    policyTypeSelector.addEventListener('change', function() {
-        const selectedType = this.value;
-        if (selectedType && policyTypes[selectedType]) {
-            policyQuestions.innerHTML = policyTypes[selectedType].questions;
-            policyQuestions.classList.remove('hidden');
-            generateButton.classList.remove('hidden');
-            policyPreview.classList.add('hidden'); // Hide preview when questions change
-        } else {
-            policyQuestions.innerHTML = '';
-            policyQuestions.classList.add('hidden');
-            generateButton.classList.add('hidden');
-            policyPreview.classList.add('hidden');
-        }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize all interactive components
+        initConflictFlowchart();
+        initCommunicationSimulator();
+        initPolicyWizard();
     });
 
-    generateButton.addEventListener('click', function() {
-        generatePolicy(policyTypeSelector.value);
+    // ===== Conflict Resolution Flowchart =====
+    function initConflictFlowchart() {
+        const flowchartContainer = document.querySelector('.flowchart-container');
+        const stepDetails = document.getElementById('step-details');
+
+        if (!flowchartContainer) return;
+
+        // Clear loading message
+        flowchartContainer.innerHTML = '';
+
+        // Create SVG element for the flowchart
+        const svg = d3.select('.flowchart-container')
+            .append('svg')
+            .attr('width', '100%')
+            .attr('height', '100%')
+            .attr('viewBox', '0 0 500 300');
+
+    // Draw connections between steps
+    const connections = [];
+    // ⚡ Bolt Optimization: Use a Map for O(1) step lookups
+    const stepMap = new Map(steps.map(s => [s.id, s]));
+
+    steps.forEach(step => {
+        step.next.forEach(nextId => {
+            // ⚡ Bolt Optimization: Replaced linear search (O(N)) with Map lookup (O(1))
+            const nextStep = stepMap.get(nextId);
+            connections.push({
+                source: step,
+                target: nextStep
+            });
+        });
     });
 
-    // Generate policy based on form inputs
-    function generatePolicy(policyType) {
-        const selectedPolicy = policyTypes[policyType];
-        if (!selectedPolicy) return;
-        
-        const purposeDescriptions = {
-            conflict: 'resolving conflicts',
-            communication: 'effective communication',
-            participation: 'supporting active participation',
-            'common-space': 'using shared common spaces'
-        };
+        svg.selectAll('path')
+            .data(connections)
+            .enter()
+            .append('path')
+            .attr('d', d => {
+                return `M${d.source.x + 75},${d.source.y + 25} L${d.target.x},${d.target.y + 25}`;
+            })
+            .attr('stroke', '#4299E1')
+            .attr('stroke-width', 2)
+            .attr('fill', 'none')
+            .attr('marker-end', 'url(#arrow)');
 
-        const purposeText = purposeDescriptions[policyType] || 'supporting our cooperative community';
+        // Add arrow marker for the connections
+        svg.append('defs').append('marker')
+            .attr('id', 'arrow')
+            .attr('viewBox', '0 -5 10 10')
+            .attr('refX', 8)
+            .attr('refY', 0)
+            .attr('markerWidth', 6)
+            .attr('markerHeight', 6)
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('d', 'M0,-5L10,0L0,5')
+            .attr('fill', '#4299E1');
 
-        let policyHTML = `
-            <h1 class="text-2xl font-bold mb-4">${selectedPolicy.title}</h1>
-            <p class="mb-4">For [Cooperative Name]</p>
+        // Draw step boxes
+        const stepGroups = svg.selectAll('g')
+            .data(steps)
+            .enter()
+            .append('g')
+            .attr('transform', d => `translate(${d.x}, ${d.y})`)
+            .attr('class', 'step')
+            .style('cursor', 'pointer')
+            .on('click', function(event, d) {
+                // Update step details when clicked
+                stepDetails.innerHTML = `
+                    <h4 class="font-semibold text-lg mb-2">${d.title}</h4>
+                    <p class="mb-3">${d.description}</p>
+                    <div class="bg-white p-3 rounded border border-blue-200">
+                        <p>${d.details}</p>
+                    </div>
+                `;
 
-            <h2 class="text-xl font-semibold mb-2">Purpose</h2>
-            <p class="mb-4">This policy establishes guidelines for ${purposeText} within our cooperative community.</p>
+                // Highlight the selected step
+                svg.selectAll('rect').attr('fill', '#EBF8FF');
+                d3.select(this).select('rect').attr('fill', '#BEE3F8');
+            });
 
-            <h2 class="text-xl font-semibold mb-2">Scope</h2>
-            <p class="mb-4">This policy applies to all members of the cooperative.</p>
+        // Add rectangles for each step
+        stepGroups.append('rect')
+            .attr('width', 150)
+            .attr('height', 50)
+            .attr('rx', 5)
+            .attr('ry', 5)
+            .attr('fill', '#EBF8FF')
+            .attr('stroke', '#4299E1')
+            .attr('stroke-width', 1);
+
+        // Add text labels for each step
+        stepGroups.append('text')
+            .attr('x', 75)
+            .attr('y', 30)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2C5282')
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .text(d => d.title);
+
+        // Initialize with the first step selected
+        stepDetails.innerHTML = `
+            <h4 class="font-semibold text-lg mb-2">${steps[0].title}</h4>
+            <p class="mb-3">${steps[0].description}</p>
+            <div class="bg-white p-3 rounded border border-blue-200">
+                <p>${steps[0].details}</p>
+            </div>
         `;
-        
-        if (policyType === 'conflict') {
-            // Get form values
-            const processValue = getRadioValue('conflict-process');
-            const mediators = getCheckboxValues('conflict-mediators');
-            const timeline = document.getElementById('conflict-timeline').value;
-            
-            policyHTML += `
-                <h2 class="text-xl font-semibold mb-2">Conflict Resolution Process</h2>
-                <p class="mb-4">${processValue || 'The cooperative will utilize a structured process for conflict resolution.'}</p>
-                
-                <h2 class="text-xl font-semibold mb-2">Mediators</h2>
-                <p class="mb-4">The following individuals are authorized to serve as mediators:</p>
-                <ul class="list-disc pl-5 mb-4">
-                    ${mediators.map(m => `<li>${m}</li>`).join('') || '<li>To be determined by the board</li>'}
-                </ul>
-                
-                <h2 class="text-xl font-semibold mb-2">Resolution Timeline</h2>
-                <p class="mb-4">${timeline || 'A timeline will be established on a case-by-case basis.'}</p>
-            `;
-        } else if (policyType === 'communication') {
-            // Get form values
-            const channels = getCheckboxValues('comm-channels');
-            const frequency = getRadioValue('comm-frequency');
-            
-            policyHTML += `
-                <h2 class="text-xl font-semibold mb-2">Communication Channels</h2>
-                <p class="mb-4">The cooperative will employ the following communication channels:</p>
-                <ul class="list-disc pl-5 mb-4">
-                    ${channels.map(c => `<li>${c}</li>`).join('') || '<li>To be determined by the board</li>'}
-                </ul>
-                
-                <h2 class="text-xl font-semibold mb-2">Communication Frequency</h2>
-                <p class="mb-4">${frequency || 'Communication frequency will be determined based on cooperative requirements.'}</p>
-            `;
-        } else if (policyType === 'participation') {
-            const participationLevel = getRadioValue('participation-level');
-            const contributionAreas = getCheckboxValues('contribution-areas');
 
-            policyHTML += `
-                <h2 class="text-xl font-semibold mb-2">Member Participation Expectations</h2>
-                <p class="mb-4">${participationLevel || 'Expectations for member participation will be defined.'}</p>
-                
-                <h2 class="text-xl font-semibold mb-2">Valued Contribution Areas</h2>
-                <p class="mb-4">Member contributions are particularly valued in the following areas:</p>
-                <ul class="list-disc pl-5 mb-4">
-                    ${contributionAreas.map(a => `<li>${a}</li>`).join('') || '<li>To be determined by the board</li>'}
-                </ul>
-            `;
-        } else if (policyType === 'common-space') {
-            const bookingProcedure = getRadioValue('booking-procedure');
-            const usageGuidelines = getCheckboxValues('usage-guidelines');
+        // Highlight the first step
+        svg.select('.step rect').attr('fill', '#BEE3F8');
+    }
 
-            policyHTML += `
-                <h2 class="text-xl font-semibold mb-2">Common Space Booking Procedure</h2>
-                <p class="mb-4">${bookingProcedure || 'A procedure for booking common spaces will be established.'}</p>
-                
-                <h2 class="text-xl font-semibold mb-2">Common Space Usage Guidelines</h2>
-                <p class="mb-4">Key guidelines for common space usage include:</p>
-                <ul class="list-disc pl-5 mb-4">
-                    ${usageGuidelines.map(g => `<li>${g}</li>`).join('') || '<li>To be determined by the board</li>'}
-                </ul>
-            `;
-        }
+    // ===== Communication Style Simulator =====
+    function initCommunicationSimulator() {
+        const scenarioSelector = document.getElementById('scenario-selector');
+        const scenarioDescription = document.getElementById('scenario-description');
+        const assertivenessSlider = document.getElementById('assertiveness-slider');
+        const cooperativenessSlider = document.getElementById('cooperativeness-slider');
+        const simulateButton = document.getElementById('simulate-button');
+        const simulationResults = document.getElementById('simulation-results');
+        const communicationStyle = document.getElementById('communication-style');
         
-        policyHTML += `
-            <h2 class="text-xl font-semibold mb-2">Review Protocol</h2>
-            <p class="mb-4">This policy will undergo an annual review by the board of directors.</p>
-            
-            <p class="mt-8">Adopted: [Date]</p>
-            <p>Last Reviewed: [Date]</p>
+        if (!scenarioSelector || !simulateButton) return;
+
+        // Update scenario description when selection changes
+        scenarioSelector.addEventListener('change', function() {
+            const selectedScenario = scenarios[this.value];
+            if (selectedScenario) {
+                scenarioDescription.innerHTML = `
+                    <h4 class="font-semibold mb-2">${selectedScenario.title}</h4>
+                    <p>${selectedScenario.description}</p>
+                `;
+            }
+        });
+
+        // Initialize with the first scenario
+        scenarioSelector.value = 'scenario1';
+        scenarioDescription.innerHTML = `
+            <h4 class="font-semibold mb-2">${scenarios.scenario1.title}</h4>
+            <p>${scenarios.scenario1.description}</p>
         `;
-        
-        // Display the generated policy
-        policyContent.innerHTML = policyHTML;
-        policyPreview.classList.remove('hidden');
-    }
-    
-    // Helper function to get radio button value
-    function getRadioValue(name) {
-        const radios = document.getElementsByName(name);
-        for (let i = 0; i < radios.length; i++) {
-            if (radios[i].checked) {
-                return radios[i].value;
-            }
-        }
-        return '';
-    }
-    
-    // Helper function to get checkbox values
-    function getCheckboxValues(name) {
-        const checkboxes = document.getElementsByName(name);
-        const values = [];
-        
-        for (let i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                values.push(checkboxes[i].value);
-            }
-        }
-        
-        return values;
-    }
-    
-    // Download policy as text file
-    downloadPolicy.addEventListener('click', function() {
-        const policyText = policyContent.innerText;
-        const policyType = policyTypeSelector.options[policyTypeSelector.selectedIndex].text;
-        const filename = policyType.replace(/\s+/g, '-').toLowerCase() + '.txt';
-        
-        const element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(policyText));
-        element.setAttribute('download', filename);
-        
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        
-        element.click();
-        
-        document.body.removeChild(element);
-    });
-}
 
+        // Simulate conversation when button is clicked
+        simulateButton.addEventListener('click', function() {
+            const assertiveness = parseInt(assertivenessSlider.value);
+            const cooperativeness = parseInt(cooperativenessSlider.value);
+            const scenarioKey = scenarioSelector.value;
 
+            // Determine communication style based on sliders
+            let style = '';
+            if (assertiveness >= 7 && cooperativeness <= 3) {
+                style = 'Competing';
+            } else if (assertiveness <= 3 && cooperativeness >= 7) {
+                style = 'Accommodating';
+            } else if (assertiveness <= 3 && cooperativeness <= 3) {
+                style = 'Avoiding';
+            } else if (assertiveness >= 4 && assertiveness <= 6 && cooperativeness >= 4 && cooperativeness <= 6) {
+                style = 'Compromising';
+            } else if (assertiveness >= 7 && cooperativeness >= 7) {
+                style = 'Collaborating';
+            } else {
+                style = 'Mixed';
+            }
+
+            // Generate simulation results based on scenario and communication style
+            let results = '';
+
+            if (scenarioKey === 'scenario1') {
+                if (style === 'Competing') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "This is unacceptable. I have submitted three requests, and the issue remains unresolved. I expect immediate action, or I will escalate this to the board."</p>
+                        <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I understand your frustration, but adherence to established procedures is necessary. Your aggressive tone is counterproductive."</p>
+                        <p class="mb-2"><strong>You:</strong> "My priority is a functional faucet, not bureaucratic processes. This must be addressed immediately."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> The maintenance coordinator becomes defensive, and the professional relationship is strained. While the repair may be expedited, it comes at the cost of goodwill and future cooperation.</p>
+                    `;
+                } else if (style === 'Accommodating') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I apologize for reiterating this, but my faucet continues to leak. I understand you are busy."</p>
+                        <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Yes, I recall. Several urgent repairs currently take precedence."</p>
+                        <p class="mb-2"><strong>You:</strong> "Understood. I am prepared to wait as necessary."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> The relationship remains amicable, but your needs are not met. The repair remains a low priority, potentially delaying resolution for an extended period.</p>
+                    `;
+                } else if (style === 'Avoiding') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> *Observes the maintenance coordinator but elects not to address the issue.*</p>
+                        <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Hello! Are you enjoying the community event?"</p>
+                        <p class="mb-2"><strong>You:</strong> "Yes, it's pleasant. I should attend to something else now..."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> Direct conflict is averted, but the underlying problem persists. Your frustration escalates, potentially diminishing your satisfaction with the cooperative environment.</p>
+                    `;
+                } else if (style === 'Compromising') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I am following up on my faucet repair. It has been a month since my initial request."</p>
+                        <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I acknowledge the delay. We have prioritized several emergency repairs."</p>
+                        <p class="mb-2"><strong>You:</strong> "I understand emergencies take precedence. Can we establish a definitive date for my repair to manage expectations?"</p>
+                        <p class="mb-4"><strong>Outcome:</strong> An agreement is reached for the repair to be completed within the next week. While not immediate, a clear timeline mitigates your frustration.</p>
+                    `;
+                } else if (style === 'Collaborating') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I wish to discuss my faucet repair. My concern is the ongoing water waste and potential structural damage."</p>
+                        <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I appreciate you raising this. We are currently managing a high volume of requests. Could you elaborate on the issue?"</p>
+                        <p class="mb-2"><strong>You:</strong> "The leak is worsening, and I am concerned about mold development. I possess basic plumbing knowledge; would my assistance expedite the repair process?"</p>
+                        <p class="mb-4"><strong>Outcome:</strong> A mutually beneficial plan is developed, addressing both your need for a timely repair and the coordinator's resource constraints. The coordinator agrees to prioritize your repair and provide materials if you can assist.</p>
+                    `;
+                }
+            } else if (scenarioKey === 'scenario2') {
+                if (style === 'Competing') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I verbally reserved this room weeks ago. The formal process is merely a bureaucratic formality."</p>
+                        <p class="mb-2"><strong>Other Member:</strong> "I adhered to the established procedure and submitted the required form. The regulations clearly define the reservation protocol."</p>
+                        <p class="mb-2"><strong>You:</strong> "My event is of greater importance, and I announced it first. I will not alter my plans."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> The conflict escalates, potentially necessitating intervention by the board. Community cohesion is compromised, and neither party perceives their concerns as respected.</p>
+                    `;
+                } else if (style === 'Accommodating') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I understand I did not complete the official form. You may proceed with your event."</p>
+                        <p class="mb-2"><strong>Other Member:</strong> "Thank you for your understanding. I appreciate your flexibility."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> You concede the room, maintaining a harmonious relationship but sacrificing your event. This may lead to future resentment if your needs are consistently deprioritized.</p>
+                    `;
+                } else if (style === 'Avoiding') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> *Notices the other member setting up in the community room but avoids confrontation.*</p>
+                        <p class="mb-2"><strong>Other Member:</strong> "(To a third party) Glad I got the form in on time!"</p>
+                        <p class="mb-4"><strong>Outcome:</strong> The conflict is unaddressed, and the other member uses the room. Your event is cancelled, and you may feel unheard or undervalued within the cooperative.</p>
+                    `;
+                } else if (style === 'Compromising') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "It appears we have a scheduling overlap. I informally reserved the room, but I acknowledge you completed the official process."</p>
+                        <p class="mb-2"><strong>Other Member:</strong> "Yes, I followed the procedure. Is there a way we can both use the space, perhaps at different times?"</p>
+                        <p class="mb-2"><strong>You:</strong> "Perhaps we could split the time, or I could use it for a shorter duration if you need the majority of the time."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> You agree to share the room or adjust your schedules, allowing both events to proceed, albeit with some modifications. This demonstrates flexibility and a willingness to find common ground.</p>
+                    `;
+                } else if (style === 'Collaborating') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "We have a conflict regarding the community room. My objective is to host my event, and I understand you also have a need for the space."</p>
+                        <p class="mb-2"><strong>Other Member:</strong> "Indeed. I followed the formal process, but I am open to finding a solution that works for both of us."</p>
+                        <p class="mb-2"><strong>You:</strong> "Could we explore alternative spaces, or perhaps adjust the timing of our events to allow both to occur without conflict? My event could be shorter if necessary."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> Through open dialogue, you identify a creative solution, such as using an alternative space, rescheduling one event, or co-hosting. Both parties achieve their objectives, and the cooperative benefits from a strengthened problem-solving culture.</p>
+                    `;
+                }
+            } else if (scenarioKey === 'scenario3') {
+                if (style === 'Competing') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "Your late-night noise is disruptive and unacceptable. This is the third time I've addressed this, and it needs to stop immediately."</p>
+                        <p class="mb-2"><strong>Neighbor:</strong> "I'm entitled to host guests. You're being overly sensitive."</p>
+                        <p class="mb-2"><strong>You:</strong> "I will report this to the board if it continues. Your actions violate community guidelines."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> The interaction escalates into an adversarial exchange, potentially leading to formal complaints and further deterioration of neighborly relations.</p>
+                    `;
+                } else if (style === 'Accommodating') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I apologize for mentioning this again, but the noise has been quite loud recently. I understand you enjoy entertaining."</p>
+                        <p class="mb-2"><strong>Neighbor:</strong> "Yes, we do. We try to be mindful, but sometimes it gets late."</p>
+                        <p class="mb-2"><strong>You:</strong> "That's perfectly fine. I just wanted to bring it to your attention."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> You prioritize maintaining a pleasant relationship, but the noise issue remains unresolved. Your discomfort persists, and the neighbor may not perceive the issue as significant.</p>
+                    `;
+                } else if (style === 'Avoiding') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> *Hears loud noise from the neighbor's unit but decides not to engage, instead using earplugs.*</p>
+                        <p class="mb-4"><strong>Outcome:</strong> The noise continues, and your discomfort is unaddressed. You may feel increasingly resentful and isolated, avoiding interaction with the neighbor.</p>
+                    `;
+                } else if (style === 'Compromising') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I need to discuss the noise levels. While I appreciate your right to entertain, the late-night volume is impacting my ability to rest."</p>
+                        <p class="mb-2"><strong>Neighbor:</strong> "I understand. We enjoy hosting, but I recognize the need for quiet hours."</p>
+                        <p class="mb-2"><strong>You:</strong> "Could we agree on a specific time, say 11 PM, after which noise levels are significantly reduced?"</p>
+                        <p class="mb-4"><strong>Outcome:</strong> You reach a compromise where the neighbor agrees to reduce noise after a certain hour. While not ideal for either party, it provides a workable solution that respects both needs.</p>
+                    `;
+                } else if (style === 'Collaborating') {
+                    results = `
+                        <p class="mb-2"><strong>You:</strong> "I want to find a solution regarding the late-night noise. My concern is the impact on my sleep, and I value our cooperative living environment."</p>
+                        <p class="mb-2"><strong>Neighbor:</strong> "I understand your concern. We enjoy socializing, and I want to ensure we are good neighbors."</p>
+                        <p class="mb-2"><strong>You:</strong> "Could we explore options such as improving sound insulation, shifting social gatherings to earlier times, or utilizing common spaces for louder activities? I am open to suggestions."</p>
+                        <p class="mb-4"><strong>Outcome:</strong> Through collaborative discussion, you identify mutually beneficial strategies, such as adjusting gathering times, utilizing sound-dampening solutions, or designating specific areas for louder activities. This strengthens the neighborly relationship and fosters a more harmonious living environment.</p>
+                    `;
+                }
+            }
+
+            simulationResults.innerHTML = results;
+            communicationStyle.innerHTML = `<p><strong>Style:</strong> ${style}</p>`;
+        });
+    }
+
+    // ===== Policy Development Wizard =====
+    function initPolicyWizard() {
+        const policyTypeSelector = document.getElementById('policy-type-selector');
+        const policyQuestions = document.getElementById('policy-questions');
+        const policyPreview = document.getElementById('policy-preview');
+        const policyContent = document.getElementById('policy-content');
+        const downloadPolicy = document.getElementById('download-policy');
+
+        if (!policyTypeSelector) return;
+
+        // Add a button to generate the policy, initially hidden
+        const generateButton = document.createElement('button');
+        generateButton.id = 'generate-policy';
+        generateButton.className = 'bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4 hidden';
+        generateButton.textContent = 'Generate Policy';
+        policyQuestions.parentNode.insertBefore(generateButton, policyQuestions.nextSibling);
+
+        policyTypeSelector.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (selectedType && policyTypes[selectedType]) {
+                policyQuestions.innerHTML = policyTypes[selectedType].questions;
+                policyQuestions.classList.remove('hidden');
+                generateButton.classList.remove('hidden');
+                policyPreview.classList.add('hidden'); // Hide preview when questions change
+            } else {
+                policyQuestions.innerHTML = '';
+                policyQuestions.classList.add('hidden');
+                generateButton.classList.add('hidden');
+                policyPreview.classList.add('hidden');
+            }
+        });
+
+        generateButton.addEventListener('click', function() {
+            generatePolicy(policyTypeSelector.value);
+        });
+
+        // Generate policy based on form inputs
+        function generatePolicy(policyType) {
+            const selectedPolicy = policyTypes[policyType];
+            if (!selectedPolicy) return;
+            
+            const purposeDescriptions = {
+                conflict: 'resolving conflicts',
+                communication: 'effective communication',
+                participation: 'supporting active participation',
+                'common-space': 'using shared common spaces'
+            };
+
+            const purposeText = purposeDescriptions[policyType] || 'supporting our cooperative community';
+
+            let policyHTML = `
+                <h1 class="text-2xl font-bold mb-4">${selectedPolicy.title}</h1>
+                <p class="mb-4">For [Cooperative Name]</p>
+
+                <h2 class="text-xl font-semibold mb-2">Purpose</h2>
+                <p class="mb-4">This policy establishes guidelines for ${purposeText} within our cooperative community.</p>
+
+                <h2 class="text-xl font-semibold mb-2">Scope</h2>
+                <p class="mb-4">This policy applies to all members of the cooperative.</p>
+            `;
+            
+            if (policyType === 'conflict') {
+                // Get form values
+                const processValue = getRadioValue('conflict-process');
+                const mediators = getCheckboxValues('conflict-mediators');
+                const timeline = document.getElementById('conflict-timeline').value;
+                
+                policyHTML += `
+                    <h2 class="text-xl font-semibold mb-2">Conflict Resolution Process</h2>
+                    <p class="mb-4">${processValue || 'The cooperative will utilize a structured process for conflict resolution.'}</p>
+
+                    <h2 class="text-xl font-semibold mb-2">Mediators</h2>
+                    <p class="mb-4">The following individuals are authorized to serve as mediators:</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        ${mediators.map(m => `<li>${m}</li>`).join('') || '<li>To be determined by the board</li>'}
+                    </ul>
+
+                    <h2 class="text-xl font-semibold mb-2">Resolution Timeline</h2>
+                    <p class="mb-4">${timeline || 'A timeline will be established on a case-by-case basis.'}</p>
+                `;
+            } else if (policyType === 'communication') {
+                // Get form values
+                const channels = getCheckboxValues('comm-channels');
+                const frequency = getRadioValue('comm-frequency');
+                
+                policyHTML += `
+                    <h2 class="text-xl font-semibold mb-2">Communication Channels</h2>
+                    <p class="mb-4">The cooperative will employ the following communication channels:</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        ${channels.map(c => `<li>${c}</li>`).join('') || '<li>To be determined by the board</li>'}
+                    </ul>
+
+                    <h2 class="text-xl font-semibold mb-2">Communication Frequency</h2>
+                    <p class="mb-4">${frequency || 'Communication frequency will be determined based on cooperative requirements.'}</p>
+                `;
+            } else if (policyType === 'participation') {
+                const participationLevel = getRadioValue('participation-level');
+                const contributionAreas = getCheckboxValues('contribution-areas');
+
+                policyHTML += `
+                    <h2 class="text-xl font-semibold mb-2">Member Participation Expectations</h2>
+                    <p class="mb-4">${participationLevel || 'Expectations for member participation will be defined.'}</p>
+
+                    <h2 class="text-xl font-semibold mb-2">Valued Contribution Areas</h2>
+                    <p class="mb-4">Member contributions are particularly valued in the following areas:</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        ${contributionAreas.map(a => `<li>${a}</li>`).join('') || '<li>To be determined by the board</li>'}
+                    </ul>
+                `;
+            } else if (policyType === 'common-space') {
+                const bookingProcedure = getRadioValue('booking-procedure');
+                const usageGuidelines = getCheckboxValues('usage-guidelines');
+
+                policyHTML += `
+                    <h2 class="text-xl font-semibold mb-2">Common Space Booking Procedure</h2>
+                    <p class="mb-4">${bookingProcedure || 'A procedure for booking common spaces will be established.'}</p>
+
+                    <h2 class="text-xl font-semibold mb-2">Common Space Usage Guidelines</h2>
+                    <p class="mb-4">Key guidelines for common space usage include:</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        ${usageGuidelines.map(g => `<li>${g}</li>`).join('') || '<li>To be determined by the board</li>'}
+                    </ul>
+                `;
+            }
+
+            policyHTML += `
+                <h2 class="text-xl font-semibold mb-2">Review Protocol</h2>
+                <p class="mb-4">This policy will undergo an annual review by the board of directors.</p>
+                
+                <p class="mt-8">Adopted: [Date]</p>
+                <p>Last Reviewed: [Date]</p>
+            `;
+            
+            // Display the generated policy
+            policyContent.innerHTML = policyHTML;
+            policyPreview.classList.remove('hidden');
+        }
+        
+        // Helper function to get radio button value
+        function getRadioValue(name) {
+            const radios = document.getElementsByName(name);
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].value;
+                }
+            }
+            return '';
+        }
+        
+        // Helper function to get checkbox values
+        function getCheckboxValues(name) {
+            const checkboxes = document.getElementsByName(name);
+            const values = [];
+
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    values.push(checkboxes[i].value);
+                }
+            }
+
+            return values;
+        }
+        
+        // Download policy as text file
+        downloadPolicy.addEventListener('click', function() {
+            const policyText = policyContent.innerText;
+            const policyType = policyTypeSelector.options[policyTypeSelector.selectedIndex].text;
+            const filename = policyType.replace(/\s+/g, '-').toLowerCase() + '.txt';
+
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(policyText));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        });
+    }
+
+})();
