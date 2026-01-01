@@ -3,11 +3,26 @@
 <head>
   <meta charset="utf-8">
   <title>QUnit Test Suite</title>
-  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.0.css">
+  <link rel="stylesheet" href="node_modules/qunit/qunit/qunit.css">
 </head>
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture">
+    <div class="flowchart-container"></div>
+    <div id="step-details"></div>
+
+    <select id="scenario-selector">
+        <option value="scenario1">Scenario 1</option>
+        <option value="scenario2">Scenario 2</option>
+        <option value="scenario3">Scenario 3</option>
+    </select>
+    <div id="scenario-description"></div>
+    <input type="range" id="assertiveness-slider" min="0" max="10" value="5">
+    <input type="range" id="cooperativeness-slider" min="0" max="10" value="5">
+    <button id="simulate-button">Simulate</button>
+    <div id="simulation-results"></div>
+    <div id="communication-style"></div>
+
     <select id="policy-type-selector">
       <option value="">-- Select a policy type --</option>
       <option value="conflict">Conflict Resolution Policy</option>
@@ -18,7 +33,53 @@
     </div>
     <button id="download-policy"></button>
   </div>
-  <script src="https://code.jquery.com/qunit/qunit-2.20.0.js"></script>
+  <script src="node_modules/qunit/qunit/qunit.js"></script>
+  <!-- Mock d3 if needed or load it. Since tests might need it for initConflictFlowchart -->
+  <script>
+      // Simple Mock D3 for tests if not available, or just ignore if tests don't cover d3 parts deep enough
+      if (typeof d3 === 'undefined') {
+          window.d3 = {
+              select: function() {
+                  return {
+                      append: function() {
+                          return {
+                              attr: function() { return this; },
+                              style: function() { return this; },
+                              on: function() { return this; },
+                              selectAll: function() {
+                                  return {
+                                      data: function() {
+                                          return {
+                                              enter: function() {
+                                                  return {
+                                                      append: function() {
+                                                          return {
+                                                              attr: function() { return this; },
+                                                              style: function() { return this; },
+                                                              on: function() { return this; },
+                                                              text: function() { return this; }
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                          }
+                                      },
+                                      attr: function() { return this; }
+                                  }
+                              },
+                              select: function() {
+                                return {
+                                    attr: function() { return this; }
+                                }
+                              }
+                          }
+                      },
+                      selectAll: function() { return { attr: function() { return this; } } }
+                  }
+              }
+          };
+      }
+  </script>
   <script src="js/interactive.js"></script>
   <script src="js/policy-wizard-tests.js"></script>
 </body>
