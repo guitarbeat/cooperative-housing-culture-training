@@ -85,13 +85,18 @@ function initConflictFlowchart() {
     
     // Draw connections between steps
     const connections = [];
+    // Optimization: Create a map for O(1) step lookup instead of O(N) array search
+    const stepMap = new Map(steps.map(s => [s.id, s]));
+
     steps.forEach(step => {
         step.next.forEach(nextId => {
-            const nextStep = steps.find(s => s.id === nextId);
-            connections.push({
-                source: step,
-                target: nextStep
-            });
+            const nextStep = stepMap.get(nextId);
+            if (nextStep) {
+                connections.push({
+                    source: step,
+                    target: nextStep
+                });
+            }
         });
     });
     

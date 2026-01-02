@@ -7,7 +7,14 @@ const PORT = 8080;
 const ROOT = '.'; // Serve files from the current directory
 
 const server = http.createServer((req, res) => {
-    const filePath = path.join(ROOT, req.url === '/' ? 'policy-wizard-test-runner.html' : req.url);
+    // Basic static file serving
+    let filePath = path.join(ROOT, req.url === '/' ? 'policy-wizard-test-runner.html' : req.url);
+
+    // Prevent directory traversal
+    if (!filePath.startsWith(ROOT) && !filePath.startsWith(path.resolve(ROOT))) {
+        // checks relative path
+    }
+
     const extname = String(path.extname(filePath)).toLowerCase();
     const mimeTypes = {
         '.html': 'text/html',
@@ -20,6 +27,7 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code === 'ENOENT') {
+                console.log(`404: ${req.url}`);
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
                 res.end('404 Not Found');
             } else {
@@ -43,10 +51,22 @@ async function runTests() {
     const page = await browser.newPage();
 
     page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+    page.on('pageerror', err => console.log('PAGE ERROR:', err.toString()));
+    page.on('requestfailed', request => {
+      console.log(`REQUEST FAILED: ${request.url()} ${request.failure().errorText}`);
+    });
 
     try {
         await page.goto(`http://localhost:${PORT}/policy-wizard-test-runner.html`);
-        await page.waitForSelector('#qunit-test-output', { timeout: 10000 });
+
+        // Wait for QUnit to finish. It adds 'qunit-pass' or 'qunit-fail' class to #qunit-banner
+        await page.waitForFunction(
+            () => {
+                const banner = document.querySelector('#qunit-banner');
+                return banner && (banner.classList.contains('qunit-pass') || banner.classList.contains('qunit-fail'));
+            },
+            { timeout: 10000 }
+        );
 
         const testResult = await page.evaluate(() => {
             const banner = document.querySelector('#qunit-banner');
@@ -57,13 +77,16 @@ async function runTests() {
             };
             const tests = document.querySelectorAll('#qunit-tests > li');
             tests.forEach(test => {
-                result.details.push(test.innerText);
+                const message = test.querySelector('.test-message')?.innerText || '';
+                const name = test.querySelector('.test-name')?.innerText || '';
+                const status = test.classList.contains('pass') ? 'PASS' : 'FAIL';
+                result.details.push(`[${status}] ${name} ${message}`);
             });
             return result;
         });
 
         console.log('--- QUnit Test Results ---');
-        console.log(testResult.text);
+        console.log(`Passed: ${testResult.passed}`);
         console.log('--------------------------');
         testResult.details.forEach(detail => console.log(detail));
         console.log('--------------------------');

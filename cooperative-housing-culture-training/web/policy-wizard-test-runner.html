@@ -8,6 +8,7 @@
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture">
+    <!-- Policy Wizard Fixtures -->
     <select id="policy-type-selector">
       <option value="">-- Select a policy type --</option>
       <option value="conflict">Conflict Resolution Policy</option>
@@ -17,9 +18,15 @@
       <div id="policy-content"></div>
     </div>
     <button id="download-policy"></button>
+
+    <!-- Conflict Flowchart Fixtures -->
+    <div class="flowchart-container"></div>
+    <div id="step-details"></div>
   </div>
   <script src="https://code.jquery.com/qunit/qunit-2.20.0.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="js/interactive.js"></script>
   <script src="js/policy-wizard-tests.js"></script>
+  <script src="js/conflict-flowchart-tests.js"></script>
 </body>
 </html>

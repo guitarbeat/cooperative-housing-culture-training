@@ -1,7 +1,10 @@
 QUnit.module('Policy Development Wizard', function(hooks) {
   hooks.beforeEach(function() {
-    // The `initPolicyWizard` function is called when the DOM is ready,
-    // which QUnit handles for us.
+    // The fixture is reset by QUnit.
+    // We need to re-initialize the wizard because the event listeners are attached to elements
+    // that are replaced when the fixture is reset.
+    // Also, initPolicyWizard adds the button dynamically, so it needs to run again.
+    initPolicyWizard();
   });
 
   QUnit.test('"Generate Policy" button visibility', function(assert) {
