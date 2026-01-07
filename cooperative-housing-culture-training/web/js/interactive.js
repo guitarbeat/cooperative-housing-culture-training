@@ -85,13 +85,19 @@ function initConflictFlowchart() {
     
     // Draw connections between steps
     const connections = [];
+    // OPTIMIZATION: Use a Map for O(1) step lookup instead of O(n) array search in the nested loop.
+    // This reduces complexity from O(n^2) to O(n) where n is the number of steps.
+    const stepsMap = new Map(steps.map(step => [step.id, step]));
+
     steps.forEach(step => {
         step.next.forEach(nextId => {
-            const nextStep = steps.find(s => s.id === nextId);
-            connections.push({
-                source: step,
-                target: nextStep
-            });
+            const nextStep = stepsMap.get(nextId);
+            if (nextStep) {
+                connections.push({
+                    source: step,
+                    target: nextStep
+                });
+            }
         });
     });
     
