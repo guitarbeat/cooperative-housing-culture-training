@@ -7,7 +7,10 @@ const PORT = 8080;
 const ROOT = '.'; // Serve files from the current directory
 
 const server = http.createServer((req, res) => {
-    const filePath = path.join(ROOT, req.url === '/' ? 'policy-wizard-test-runner.html' : req.url);
+    // Normalize url to handle query parameters if any, though simple test runner doesn't use them much
+    let reqUrl = req.url.split('?')[0];
+
+    const filePath = path.join(ROOT, reqUrl === '/' ? 'policy-wizard-test-runner.html' : reqUrl);
     const extname = String(path.extname(filePath)).toLowerCase();
     const mimeTypes = {
         '.html': 'text/html',
@@ -20,6 +23,7 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code === 'ENOENT') {
+                console.log(`404 Not Found: ${filePath}`);
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
                 res.end('404 Not Found');
             } else {
@@ -46,7 +50,12 @@ async function runTests() {
 
     try {
         await page.goto(`http://localhost:${PORT}/policy-wizard-test-runner.html`);
-        await page.waitForSelector('#qunit-test-output', { timeout: 10000 });
+
+        // Wait for QUnit to finish
+        await page.waitForFunction(() => {
+            const banner = document.querySelector('#qunit-banner');
+            return banner && (banner.classList.contains('qunit-pass') || banner.classList.contains('qunit-fail'));
+        }, { timeout: 10000 });
 
         const testResult = await page.evaluate(() => {
             const banner = document.querySelector('#qunit-banner');
@@ -57,13 +66,15 @@ async function runTests() {
             };
             const tests = document.querySelectorAll('#qunit-tests > li');
             tests.forEach(test => {
-                result.details.push(test.innerText);
+                const status = test.className;
+                const message = test.querySelector('.test-message')?.innerText || test.innerText.split('\n')[0];
+                result.details.push(`[${status}] ${message}`);
             });
             return result;
         });
 
         console.log('--- QUnit Test Results ---');
-        console.log(testResult.text);
+        console.log(`Status: ${testResult.passed ? 'PASSED' : 'FAILED'}`);
         console.log('--------------------------');
         testResult.details.forEach(detail => console.log(detail));
         console.log('--------------------------');
