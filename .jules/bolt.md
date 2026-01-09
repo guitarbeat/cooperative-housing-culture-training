@@ -1,0 +1,3 @@
+## 2024-05-22 - QUnit Fixture and DOM Events
+**Learning:** QUnit's `#qunit-fixture` reset mechanism destroys and recreates DOM elements between tests. This means event listeners attached during `DOMContentLoaded` are lost for subsequent tests if they target elements inside the fixture.
+**Action:** When testing interactive components with QUnit, explicitly re-initialize the component (and its event listeners) in the `beforeEach` hook to ensure the DOM is interactive for every test case. Also, ensure initialization functions are idempotent or handle re-initialization gracefully (e.g. checking if a button already exists before creating it).

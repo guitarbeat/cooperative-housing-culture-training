@@ -222,6 +222,101 @@ function initCommunicationSimulator() {
         <p>${scenarios.scenario1.description}</p>
     `;
     
+    const simulationData = {
+        scenario1: {
+            Competing: `
+                <p class="mb-2"><strong>You:</strong> "This is unacceptable. I have submitted three requests, and the issue remains unresolved. I expect immediate action, or I will escalate this to the board."</p>
+                <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I understand your frustration, but adherence to established procedures is necessary. Your aggressive tone is counterproductive."</p>
+                <p class="mb-2"><strong>You:</strong> "My priority is a functional faucet, not bureaucratic processes. This must be addressed immediately."</p>
+                <p class="mb-4"><strong>Outcome:</strong> The maintenance coordinator becomes defensive, and the professional relationship is strained. While the repair may be expedited, it comes at the cost of goodwill and future cooperation.</p>
+            `,
+            Accommodating: `
+                <p class="mb-2"><strong>You:</strong> "I apologize for reiterating this, but my faucet continues to leak. I understand you are busy."</p>
+                <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Yes, I recall. Several urgent repairs currently take precedence."</p>
+                <p class="mb-2"><strong>You:</strong> "Understood. I am prepared to wait as necessary."</p>
+                <p class="mb-4"><strong>Outcome:</strong> The relationship remains amicable, but your needs are not met. The repair remains a low priority, potentially delaying resolution for an extended period.</p>
+            `,
+            Avoiding: `
+                <p class="mb-2"><strong>You:</strong> *Observes the maintenance coordinator but elects not to address the issue.*</p>
+                <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Hello! Are you enjoying the community event?"</p>
+                <p class="mb-2"><strong>You:</strong> "Yes, it's pleasant. I should attend to something else now..."</p>
+                <p class="mb-4"><strong>Outcome:</strong> Direct conflict is averted, but the underlying problem persists. Your frustration escalates, potentially diminishing your satisfaction with the cooperative environment.</p>
+            `,
+            Compromising: `
+                <p class="mb-2"><strong>You:</strong> "I am following up on my faucet repair. It has been a month since my initial request."</p>
+                <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I acknowledge the delay. We have prioritized several emergency repairs."</p>
+                <p class="mb-2"><strong>You:</strong> "I understand emergencies take precedence. Can we establish a definitive date for my repair to manage expectations?"</p>
+                <p class="mb-4"><strong>Outcome:</strong> An agreement is reached for the repair to be completed within the next week. While not immediate, a clear timeline mitigates your frustration.</p>
+            `,
+            Collaborating: `
+                <p class="mb-2"><strong>You:</strong> "I wish to discuss my faucet repair. My concern is the ongoing water waste and potential structural damage."</p>
+                <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I appreciate you raising this. We are currently managing a high volume of requests. Could you elaborate on the issue?"</p>
+                <p class="mb-2"><strong>You:</strong> "The leak is worsening, and I am concerned about mold development. I possess basic plumbing knowledge; would my assistance expedite the repair process?"</p>
+                <p class="mb-4"><strong>Outcome:</strong> A mutually beneficial plan is developed, addressing both your need for a timely repair and the coordinator's resource constraints. The coordinator agrees to prioritize your repair and provide materials if you can assist.</p>
+            `
+        },
+        scenario2: {
+            Competing: `
+                <p class="mb-2"><strong>You:</strong> "I verbally reserved this room weeks ago. The formal process is merely a bureaucratic formality."</p>
+                <p class="mb-2"><strong>Other Member:</strong> "I adhered to the established procedure and submitted the required form. The regulations clearly define the reservation protocol."</p>
+                <p class="mb-2"><strong>You:</strong> "My event is of greater importance, and I announced it first. I will not alter my plans."</p>
+                <p class="mb-4"><strong>Outcome:</strong> The conflict escalates, potentially necessitating intervention by the board. Community cohesion is compromised, and neither party perceives their concerns as respected.</p>
+            `,
+            Accommodating: `
+                <p class="mb-2"><strong>You:</strong> "I understand I did not complete the official form. You may proceed with your event."</p>
+                <p class="mb-2"><strong>Other Member:</strong> "Thank you for your understanding. I appreciate your flexibility."</p>
+                <p class="mb-4"><strong>Outcome:</strong> You concede the room, maintaining a harmonious relationship but sacrificing your event. This may lead to future resentment if your needs are consistently deprioritized.</p>
+            `,
+            Avoiding: `
+                <p class="mb-2"><strong>You:</strong> *Notices the other member setting up in the community room but avoids confrontation.*</p>
+                <p class="mb-2"><strong>Other Member:</strong> "(To a third party) Glad I got the form in on time!"</p>
+                <p class="mb-4"><strong>Outcome:</strong> The conflict is unaddressed, and the other member uses the room. Your event is cancelled, and you may feel unheard or undervalued within the cooperative.</p>
+            `,
+            Compromising: `
+                <p class="mb-2"><strong>You:</strong> "It appears we have a scheduling overlap. I informally reserved the room, but I acknowledge you completed the official process."</p>
+                <p class="mb-2"><strong>Other Member:</strong> "Yes, I followed the procedure. Is there a way we can both use the space, perhaps at different times?"</p>
+                <p class="mb-2"><strong>You:</strong> "Perhaps we could split the time, or I could use it for a shorter duration if you need the majority of the time."</p>
+                <p class="mb-4"><strong>Outcome:</strong> You agree to share the room or adjust your schedules, allowing both events to proceed, albeit with some modifications. This demonstrates flexibility and a willingness to find common ground.</p>
+            `,
+            Collaborating: `
+                <p class="mb-2"><strong>You:</strong> "We have a conflict regarding the community room. My objective is to host my event, and I understand you also have a need for the space."</p>
+                <p class="mb-2"><strong>Other Member:</strong> "Indeed. I followed the formal process, but I am open to finding a solution that works for both of us."</p>
+                <p class="mb-2"><strong>You:</strong> "Could we explore alternative spaces, or perhaps adjust the timing of our events to allow both to occur without conflict? My event could be shorter if necessary."</p>
+                <p class="mb-4"><strong>Outcome:</strong> Through open dialogue, you identify a creative solution, such as using an alternative space, rescheduling one event, or co-hosting. Both parties achieve their objectives, and the cooperative benefits from a strengthened problem-solving culture.</p>
+            `
+        },
+        scenario3: {
+            Competing: `
+                <p class="mb-2"><strong>You:</strong> "Your late-night noise is disruptive and unacceptable. This is the third time I've addressed this, and it needs to stop immediately."</p>
+                <p class="mb-2"><strong>Neighbor:</strong> "I'm entitled to host guests. You're being overly sensitive."</p>
+                <p class="mb-2"><strong>You:</strong> "I will report this to the board if it continues. Your actions violate community guidelines."</p>
+                <p class="mb-4"><strong>Outcome:</strong> The interaction escalates into an adversarial exchange, potentially leading to formal complaints and further deterioration of neighborly relations.</p>
+            `,
+            Accommodating: `
+                <p class="mb-2"><strong>You:</strong> "I apologize for mentioning this again, but the noise has been quite loud recently. I understand you enjoy entertaining."</p>
+                <p class="mb-2"><strong>Neighbor:</strong> "Yes, we do. We try to be mindful, but sometimes it gets late."</p>
+                <p class="mb-2"><strong>You:</strong> "That's perfectly fine. I just wanted to bring it to your attention."</p>
+                <p class="mb-4"><strong>Outcome:</strong> You prioritize maintaining a pleasant relationship, but the noise issue remains unresolved. Your discomfort persists, and the neighbor may not perceive the issue as significant.</p>
+            `,
+            Avoiding: `
+                <p class="mb-2"><strong>You:</strong> *Hears loud noise from the neighbor's unit but decides not to engage, instead using earplugs.*</p>
+                <p class="mb-4"><strong>Outcome:</strong> The noise continues, and your discomfort is unaddressed. You may feel increasingly resentful and isolated, avoiding interaction with the neighbor.</p>
+            `,
+            Compromising: `
+                <p class="mb-2"><strong>You:</strong> "I need to discuss the noise levels. While I appreciate your right to entertain, the late-night volume is impacting my ability to rest."</p>
+                <p class="mb-2"><strong>Neighbor:</strong> "I understand. We enjoy hosting, but I recognize the need for quiet hours."</p>
+                <p class="mb-2"><strong>You:</strong> "Could we agree on a specific time, say 11 PM, after which noise levels are significantly reduced?"</p>
+                <p class="mb-4"><strong>Outcome:</strong> You reach a compromise where the neighbor agrees to reduce noise after a certain hour. While not ideal for either party, it provides a workable solution that respects both needs.</p>
+            `,
+            Collaborating: `
+                <p class="mb-2"><strong>You:</strong> "I want to find a solution regarding the late-night noise. My concern is the impact on my sleep, and I value our cooperative living environment."</p>
+                <p class="mb-2"><strong>Neighbor:</strong> "I understand your concern. We enjoy socializing, and I want to ensure we are good neighbors."</p>
+                <p class="mb-2"><strong>You:</strong> "Could we explore options such as improving sound insulation, shifting social gatherings to earlier times, or utilizing common spaces for louder activities? I am open to suggestions."</p>
+                <p class="mb-4"><strong>Outcome:</strong> Through collaborative discussion, you identify mutually beneficial strategies, such as adjusting gathering times, utilizing sound-dampening solutions, or designating specific areas for louder activities. This strengthens the neighborly relationship and fosters a more harmonious living environment.</p>
+            `
+        }
+    };
+
     // Simulate conversation when button is clicked
     simulateButton.addEventListener('click', function() {
         const assertiveness = parseInt(assertivenessSlider.value);
@@ -245,116 +340,9 @@ function initCommunicationSimulator() {
         }
         
         // Generate simulation results based on scenario and communication style
-        let results = '';
-        
-        if (scenarioKey === 'scenario1') {
-            if (style === 'Competing') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "This is unacceptable. I have submitted three requests, and the issue remains unresolved. I expect immediate action, or I will escalate this to the board."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I understand your frustration, but adherence to established procedures is necessary. Your aggressive tone is counterproductive."</p>
-                    <p class="mb-2"><strong>You:</strong> "My priority is a functional faucet, not bureaucratic processes. This must be addressed immediately."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The maintenance coordinator becomes defensive, and the professional relationship is strained. While the repair may be expedited, it comes at the cost of goodwill and future cooperation.</p>
-                `;
-            } else if (style === 'Accommodating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I apologize for reiterating this, but my faucet continues to leak. I understand you are busy."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Yes, I recall. Several urgent repairs currently take precedence."</p>
-                    <p class="mb-2"><strong>You:</strong> "Understood. I am prepared to wait as necessary."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The relationship remains amicable, but your needs are not met. The repair remains a low priority, potentially delaying resolution for an extended period.</p>
-                `;
-            } else if (style === 'Avoiding') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> *Observes the maintenance coordinator but elects not to address the issue.*</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "Hello! Are you enjoying the community event?"</p>
-                    <p class="mb-2"><strong>You:</strong> "Yes, it's pleasant. I should attend to something else now..."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> Direct conflict is averted, but the underlying problem persists. Your frustration escalates, potentially diminishing your satisfaction with the cooperative environment.</p>
-                `;
-            } else if (style === 'Compromising') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I am following up on my faucet repair. It has been a month since my initial request."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I acknowledge the delay. We have prioritized several emergency repairs."</p>
-                    <p class="mb-2"><strong>You:</strong> "I understand emergencies take precedence. Can we establish a definitive date for my repair to manage expectations?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> An agreement is reached for the repair to be completed within the next week. While not immediate, a clear timeline mitigates your frustration.</p>
-                `;
-            } else if (style === 'Collaborating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I wish to discuss my faucet repair. My concern is the ongoing water waste and potential structural damage."</p>
-                    <p class="mb-2"><strong>Maintenance Coordinator:</strong> "I appreciate you raising this. We are currently managing a high volume of requests. Could you elaborate on the issue?"</p>
-                    <p class="mb-2"><strong>You:</strong> "The leak is worsening, and I am concerned about mold development. I possess basic plumbing knowledge; would my assistance expedite the repair process?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> A mutually beneficial plan is developed, addressing both your need for a timely repair and the coordinator's resource constraints. The coordinator agrees to prioritize your repair and provide materials if you can assist.</p>
-                `;
-            }
-        } else if (scenarioKey === 'scenario2') {
-            if (style === 'Competing') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I verbally reserved this room weeks ago. The formal process is merely a bureaucratic formality."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "I adhered to the established procedure and submitted the required form. The regulations clearly define the reservation protocol."</p>
-                    <p class="mb-2"><strong>You:</strong> "My event is of greater importance, and I announced it first. I will not alter my plans."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The conflict escalates, potentially necessitating intervention by the board. Community cohesion is compromised, and neither party perceives their concerns as respected.</p>
-                `;
-            } else if (style === 'Accommodating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I understand I did not complete the official form. You may proceed with your event."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "Thank you for your understanding. I appreciate your flexibility."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You concede the room, maintaining a harmonious relationship but sacrificing your event. This may lead to future resentment if your needs are consistently deprioritized.</p>
-                `;
-            } else if (style === 'Avoiding') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> *Notices the other member setting up in the community room but avoids confrontation.*</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "(To a third party) Glad I got the form in on time!"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The conflict is unaddressed, and the other member uses the room. Your event is cancelled, and you may feel unheard or undervalued within the cooperative.</p>
-                `;
-            } else if (style === 'Compromising') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "It appears we have a scheduling overlap. I informally reserved the room, but I acknowledge you completed the official process."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "Yes, I followed the procedure. Is there a way we can both use the space, perhaps at different times?"</p>
-                    <p class="mb-2"><strong>You:</strong> "Perhaps we could split the time, or I could use it for a shorter duration if you need the majority of the time."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You agree to share the room or adjust your schedules, allowing both events to proceed, albeit with some modifications. This demonstrates flexibility and a willingness to find common ground.</p>
-                `;
-            } else if (style === 'Collaborating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "We have a conflict regarding the community room. My objective is to host my event, and I understand you also have a need for the space."</p>
-                    <p class="mb-2"><strong>Other Member:</strong> "Indeed. I followed the formal process, but I am open to finding a solution that works for both of us."</p>
-                    <p class="mb-2"><strong>You:</strong> "Could we explore alternative spaces, or perhaps adjust the timing of our events to allow both to occur without conflict? My event could be shorter if necessary."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> Through open dialogue, you identify a creative solution, such as using an alternative space, rescheduling one event, or co-hosting. Both parties achieve their objectives, and the cooperative benefits from a strengthened problem-solving culture.</p>
-                `;
-            }
-        } else if (scenarioKey === 'scenario3') {
-            if (style === 'Competing') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "Your late-night noise is disruptive and unacceptable. This is the third time I've addressed this, and it needs to stop immediately."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "I'm entitled to host guests. You're being overly sensitive."</p>
-                    <p class="mb-2"><strong>You:</strong> "I will report this to the board if it continues. Your actions violate community guidelines."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The interaction escalates into an adversarial exchange, potentially leading to formal complaints and further deterioration of neighborly relations.</p>
-                `;
-            } else if (style === 'Accommodating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I apologize for mentioning this again, but the noise has been quite loud recently. I understand you enjoy entertaining."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "Yes, we do. We try to be mindful, but sometimes it gets late."</p>
-                    <p class="mb-2"><strong>You:</strong> "That's perfectly fine. I just wanted to bring it to your attention."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You prioritize maintaining a pleasant relationship, but the noise issue remains unresolved. Your discomfort persists, and the neighbor may not perceive the issue as significant.</p>
-                `;
-            } else if (style === 'Avoiding') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> *Hears loud noise from the neighbor's unit but decides not to engage, instead using earplugs.*</p>
-                    <p class="mb-4"><strong>Outcome:</strong> The noise continues, and your discomfort is unaddressed. You may feel increasingly resentful and isolated, avoiding interaction with the neighbor.</p>
-                `;
-            } else if (style === 'Compromising') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I need to discuss the noise levels. While I appreciate your right to entertain, the late-night volume is impacting my ability to rest."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "I understand. We enjoy hosting, but I recognize the need for quiet hours."</p>
-                    <p class="mb-2"><strong>You:</strong> "Could we agree on a specific time, say 11 PM, after which noise levels are significantly reduced?"</p>
-                    <p class="mb-4"><strong>Outcome:</strong> You reach a compromise where the neighbor agrees to reduce noise after a certain hour. While not ideal for either party, it provides a workable solution that respects both needs.</p>
-                `;
-            } else if (style === 'Collaborating') {
-                results = `
-                    <p class="mb-2"><strong>You:</strong> "I want to find a solution regarding the late-night noise. My concern is the impact on my sleep, and I value our cooperative living environment."</p>
-                    <p class="mb-2"><strong>Neighbor:</strong> "I understand your concern. We enjoy socializing, and I want to ensure we are good neighbors."</p>
-                    <p class="mb-2"><strong>You:</strong> "Could we explore options such as improving sound insulation, shifting social gatherings to earlier times, or utilizing common spaces for louder activities? I am open to suggestions."</p>
-                    <p class="mb-4"><strong>Outcome:</strong> Through collaborative discussion, you identify mutually beneficial strategies, such as adjusting gathering times, utilizing sound-dampening solutions, or designating specific areas for louder activities. This strengthens the neighborly relationship and fosters a more harmonious living environment.</p>
-                `;
-            }
-        }
+        const results = simulationData[scenarioKey] && simulationData[scenarioKey][style]
+            ? simulationData[scenarioKey][style]
+            : '';
         
         simulationResults.innerHTML = results;
         communicationStyle.innerHTML = `<p><strong>Style:</strong> ${style}</p>`;
@@ -533,13 +521,25 @@ function initPolicyWizard() {
     };
 
     // Add a button to generate the policy, initially hidden
-    const generateButton = document.createElement('button');
-    generateButton.id = 'generate-policy';
-    generateButton.className = 'bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4 hidden';
-    generateButton.textContent = 'Generate Policy';
-    policyQuestions.parentNode.insertBefore(generateButton, policyQuestions.nextSibling);
+    let generateButton = document.getElementById('generate-policy');
+    if (!generateButton) {
+        generateButton = document.createElement('button');
+        generateButton.id = 'generate-policy';
+        generateButton.className = 'bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4 hidden';
+        generateButton.textContent = 'Generate Policy';
+        policyQuestions.parentNode.insertBefore(generateButton, policyQuestions.nextSibling);
+    }
 
-    policyTypeSelector.addEventListener('change', function() {
+    // Remove existing event listeners to prevent duplicates if re-initialized
+    // (Note: This is a simple approach; for more complex apps, use named functions or {once: true})
+    // cloning the node removes listeners
+    const newPolicyTypeSelector = policyTypeSelector.cloneNode(true);
+    policyTypeSelector.parentNode.replaceChild(newPolicyTypeSelector, policyTypeSelector);
+
+    // We also need to re-acquire the reference
+    const activePolicyTypeSelector = document.getElementById('policy-type-selector');
+
+    activePolicyTypeSelector.addEventListener('change', function() {
         const selectedType = this.value;
         if (selectedType && policyTypes[selectedType]) {
             policyQuestions.innerHTML = policyTypes[selectedType].questions;
@@ -554,8 +554,14 @@ function initPolicyWizard() {
         }
     });
 
+    // Cloning generateButton to remove old listeners
+    const newGenerateButton = generateButton.cloneNode(true);
+    generateButton.parentNode.replaceChild(newGenerateButton, generateButton);
+    // Reference update
+    generateButton = newGenerateButton;
+
     generateButton.addEventListener('click', function() {
-        generatePolicy(policyTypeSelector.value);
+        generatePolicy(activePolicyTypeSelector.value);
     });
 
     // Generate policy based on form inputs
