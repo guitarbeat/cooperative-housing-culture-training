@@ -2,6 +2,11 @@ QUnit.module('Policy Development Wizard', function(hooks) {
   hooks.beforeEach(function() {
     // The `initPolicyWizard` function is called when the DOM is ready,
     // which QUnit handles for us.
+    // However, QUnit resets the fixture between tests, so we need to
+    // re-initialize the interactive components.
+    if (typeof initPolicyWizard === 'function') {
+        initPolicyWizard();
+    }
   });
 
   QUnit.test('"Generate Policy" button visibility', function(assert) {
