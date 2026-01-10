@@ -1,7 +1,8 @@
 QUnit.module('Policy Development Wizard', function(hooks) {
   hooks.beforeEach(function() {
-    // The `initPolicyWizard` function is called when the DOM is ready,
-    // which QUnit handles for us.
+    // Re-initialize the component because QUnit resets the fixture
+    // and the original event listeners are lost.
+    initPolicyWizard();
   });
 
   QUnit.test('"Generate Policy" button visibility', function(assert) {
@@ -24,5 +25,35 @@ QUnit.module('Policy Development Wizard', function(hooks) {
 
     // 5. Check that the button is hidden again.
     assert.ok(generateButton.classList.contains('hidden'), 'Button is hidden after deselecting');
+  });
+
+  QUnit.test('Conflict Flowchart Initialization', function(assert) {
+    // Setup: Create container
+    const container = document.createElement('div');
+    container.className = 'flowchart-container';
+    // Must attach to fixture so D3 can find it if it uses document.querySelector,
+    // or if the test assumes it's in the DOM.
+    // QUnit cleans up #qunit-fixture.
+    document.getElementById('qunit-fixture').appendChild(container);
+
+    // Setup: Create step-details
+    const details = document.createElement('div');
+    details.id = 'step-details';
+    document.getElementById('qunit-fixture').appendChild(details);
+
+    // Init
+    initConflictFlowchart();
+
+    // Verify: Check if SVG was created
+    const svg = container.querySelector('svg');
+    assert.ok(svg, 'SVG element created');
+
+    // Verify: Check connections
+    const paths = svg.querySelectorAll('path');
+    assert.ok(paths.length > 0, 'Paths (connections) drawn');
+
+    // Verify: Check steps
+    const steps = svg.querySelectorAll('g.step');
+    assert.ok(steps.length > 0, 'Step groups created');
   });
 });

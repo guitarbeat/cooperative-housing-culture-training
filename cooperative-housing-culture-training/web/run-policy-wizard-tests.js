@@ -20,6 +20,7 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code === 'ENOENT') {
+                console.log(`404 Not Found: ${req.url} (mapped to ${filePath})`);
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
                 res.end('404 Not Found');
             } else {
@@ -46,7 +47,14 @@ async function runTests() {
 
     try {
         await page.goto(`http://localhost:${PORT}/policy-wizard-test-runner.html`);
-        await page.waitForSelector('#qunit-test-output', { timeout: 10000 });
+        // Wait for QUnit to finish (banner gets class qunit-pass or qunit-fail)
+        await page.waitForFunction(
+            () => {
+                const banner = document.querySelector('#qunit-banner');
+                return banner && (banner.classList.contains('qunit-pass') || banner.classList.contains('qunit-fail'));
+            },
+            { timeout: 10000 }
+        );
 
         const testResult = await page.evaluate(() => {
             const banner = document.querySelector('#qunit-banner');
